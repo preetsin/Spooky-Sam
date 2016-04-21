@@ -12,12 +12,24 @@ public class InputScript : MonoBehaviour
     Animator anim;
     CharacterController controller;
     float speed;
+
+	// ========= For graveyard ==============
+	bool isOpen;
+	// ========= For graveyard end ==============
+
+
     void Start() {
         speed = 5f;
          anim = GetComponent< Animator > ();
         controller = GetComponent<CharacterController>();
         isAttacking = false;
         WeaponState = 0;
+
+
+		// ========= For graveyard ==============
+		isOpen = false;
+		// ========= For graveyard end ==============
+
     }
 
     void Update()
@@ -113,6 +125,32 @@ public class InputScript : MonoBehaviour
             GetComponent<Outfitter>().weapons[4].models[0].enabled = false;
             GetComponent<Outfitter>().weapons[0].models[0].enabled = true;
         }
-    }
-}
 
+
+
+		if (Input.GetKey (KeyCode.F)) 
+		{
+			GameObject lever = GameObject.Find ("LeverPivot");
+			if (!isOpen) 
+			{
+				isOpen = true;
+				//GameObject.Find ("LeverPivot").transform.Rotate (new Vector3 (0, 0, 9) * Time.deltaTime * 5.0f);
+				lever.transform.rotation = Quaternion.Lerp(lever.transform.rotation, Quaternion.Euler (0, 0, 9), Time.time * 2.0f);
+
+			}
+			else if (isOpen) 
+			{
+				isOpen = false;
+				//GameObject.Find ("LeverPivot").transform.Rotate (new Vector3 (0, 0, -9) * Time.deltaTime * 5.0f);
+				lever.transform.rotation = Quaternion.Lerp(Quaternion.Euler (0, 0, 9), Quaternion.Euler (0, 0, 351), Time.time * 2.0f);
+
+			}
+
+		}
+
+
+    
+
+	}
+
+}
