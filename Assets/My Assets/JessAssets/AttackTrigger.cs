@@ -9,8 +9,6 @@ public class AttackTrigger : MonoBehaviour {
 
 	GameObject player;
 
-	AudioSource backgroundMusicSource;
-	AudioClip backgroundMusic;
 
 
 
@@ -22,8 +20,6 @@ public class AttackTrigger : MonoBehaviour {
 		if (col.gameObject.tag == "Player") {
 
 			player = col.gameObject;
-
-			backgroundMusicSource.Play ();
 
 			attackMode = true;
 
@@ -45,7 +41,6 @@ public class AttackTrigger : MonoBehaviour {
 
 	void Start () {
 
-		backgroundMusicSource = gameObject.GetComponent<AudioSource> ();
 
 	
 	}
@@ -54,9 +49,6 @@ public class AttackTrigger : MonoBehaviour {
 
 		if (attackMode) {
 
-
-			//clown get ready to fight... each showing off their signature move
-			//clown attack one by one
 		}
 	
 	}
