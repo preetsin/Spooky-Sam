@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ClownHandler : MonoBehaviour {
+public class Clown_Patrol : MonoBehaviour {
+	
 	public Transform[] targetDestinations;
 	NavMeshAgent agent;
 	public Animator animator;
