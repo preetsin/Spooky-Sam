@@ -9,6 +9,8 @@ public class AttackTrigger : MonoBehaviour {
 
 	GameObject player;
 
+	AudioSource evilLaugh;
+
 
 
 
@@ -22,7 +24,7 @@ public class AttackTrigger : MonoBehaviour {
 			player = col.gameObject;
 
 			attackMode = true;
-
+			int currEnemyId = 0;
 			foreach (GameObject enemyObj in enemyObjects) {
 
 				Animator enemyAnimator = enemyObj.GetComponentInChildren<Animator> ();
@@ -32,6 +34,14 @@ public class AttackTrigger : MonoBehaviour {
 				enemyAnimator.SetBool ("isKneeling", false);
 				enemyAnimator.SetBool ("isWalking", false);
 
+				if (currEnemyId == 1) {
+					enemyAnimator.SetTrigger ("Laugh");
+					evilLaugh = enemyObj.GetComponentInChildren<AudioSource> ();
+					evilLaugh.Play ();
+				}
+
+				currEnemyId++;
+
 				enemyObj.transform.LookAt (player.transform);
 
 			}
@@ -40,7 +50,6 @@ public class AttackTrigger : MonoBehaviour {
 
 
 	void Start () {
-
 
 	
 	}
