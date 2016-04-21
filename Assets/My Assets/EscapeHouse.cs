@@ -5,8 +5,10 @@ public class EscapeHouse : MonoBehaviour
 {
     public GameObject brokenGrate;
     GameObject player;
+
     bool escaped = false;
     bool inTrigger = false;
+
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -36,7 +38,6 @@ public class EscapeHouse : MonoBehaviour
             }
             if (escaped)
             {
-                
                 GetComponent<MeshRenderer>().enabled = false;
                 GetComponent<MeshCollider>().enabled = false;
                 brokenGrate.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;

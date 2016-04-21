@@ -22,10 +22,15 @@ public class FlingItem : MonoBehaviour {
 	void FixedUpdate () {
         if (entered)
         {
-            if (Random.Range(0, 500) == 11)
+            if (Random.Range(0, 200) == 11)
             {
-                GameObject flingBox = (GameObject)Instantiate(box, box.transform.position, box.transform.rotation);
-                flingBox.GetComponent<Rigidbody>().AddForce((box.transform.position - target.transform.position) * 200 * 1 * Time.smoothDeltaTime);
+
+                Vector3   dir = target.transform.position - box.transform.position;
+                dir = dir.normalized;
+                GameObject flingBox = (GameObject)Instantiate(box, box.transform.position, Quaternion.identity);
+                flingBox.GetComponent<Animation>().enabled = false;
+                flingBox.GetComponent<Animator>().enabled = false;
+                flingBox.GetComponent<Rigidbody>().AddForce(dir * 1000, ForceMode.Acceleration);
             }
         }
 	}
