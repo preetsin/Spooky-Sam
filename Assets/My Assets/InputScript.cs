@@ -13,9 +13,12 @@ public class InputScript : MonoBehaviour
     CharacterController controller;
     float speed;
 
-	// ========= For graveyard ==============
-	bool isOpen;
-	// ========= For graveyard end ==============
+    // ========= graveyard region starts ================
+    bool isOn;
+    bool isCloseToDoorLever;
+    float delayTime;
+    float delay;
+    // ========= graveyard region ends ================
 
 
     void Start() {
@@ -26,9 +29,12 @@ public class InputScript : MonoBehaviour
         WeaponState = 0;
 
 
-		// ========= For graveyard ==============
-		isOpen = false;
-		// ========= For graveyard end ==============
+        // ========= graveyard region starts ================
+        isOn = false;
+        isCloseToDoorLever = false;
+        delayTime = 0.15f;
+        delay = 0.0f;
+        // ========= graveyard region ends ================
 
     }
 
@@ -128,29 +134,46 @@ public class InputScript : MonoBehaviour
 
 
 
-		if (Input.GetKey (KeyCode.F)) 
-		{
-			GameObject lever = GameObject.Find ("LeverPivot");
-			if (!isOpen) 
-			{
-				isOpen = true;
-				//GameObject.Find ("LeverPivot").transform.Rotate (new Vector3 (0, 0, 9) * Time.deltaTime * 5.0f);
-				lever.transform.rotation = Quaternion.Lerp(lever.transform.rotation, Quaternion.Euler (0, 0, 9), Time.time * 2.0f);
+        
+        // ========= graveyard code starts ==============
+        if (Input.GetKey(KeyCode.F) && isCloseToDoorLever && Time.time > delay)
+        {
+            delay = Time.time + delayTime;
+            GameObject lever = GameObject.Find("LeverPivot");
+            if (!isOn)
+            {
+                lever.transform.rotation = Quaternion.Lerp(lever.transform.rotation, Quaternion.Euler(0, 0, 15), Time.time * 2.0f);
+                isOn = true;
+            }
+            else if (isOn)
+            {
+                lever.transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 9), Quaternion.Euler(0, 0, 345), Time.time * 2.0f);
+                isOn = false;
+            }
+        }
+        // ========= graveyard region ends ============
+        
 
-			}
-			else if (isOpen) 
-			{
-				isOpen = false;
-				//GameObject.Find ("LeverPivot").transform.Rotate (new Vector3 (0, 0, -9) * Time.deltaTime * 5.0f);
-				lever.transform.rotation = Quaternion.Lerp(Quaternion.Euler (0, 0, 9), Quaternion.Euler (0, 0, 351), Time.time * 2.0f);
 
-			}
+    }
 
-		}
+    void OnTriggerEnter(Collider other)
+    {
+        // ========= graveyard region starts ===========
+        if (other.CompareTag("GraveyardDoorLever")) { isCloseToDoorLever = true; }
+        // ========= graveyard region ends ============
+    }
 
 
-    
+    void OnTriggerExit(Collider other)
+    {
+        // ========= graveyard code starts ==============
+        if (other.CompareTag("GraveyardDoorLever")) { isCloseToDoorLever = false; }
+        // ========= graveyard code ends ==============
+    }
 
-	}
+    void OnTriggerStay(Collider other) { }
+
+
 
 }

@@ -11,11 +11,11 @@ public class DoorLeverScript : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		leverText.text = "Press Some Button";
-		Debug.Log ("Object Entered Trigger");
+		//Debug.Log ("Object Entered Trigger");
 	}
 
 	void OnTriggerExit(Collider other){
 		leverText.text = "";
-		Debug.Log ("Object Exit Trigger");
+		//Debug.Log ("Object Exit Trigger");
 	}
 }
