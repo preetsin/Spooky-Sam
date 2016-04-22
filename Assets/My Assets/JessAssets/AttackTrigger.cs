@@ -4,10 +4,12 @@ using System.Collections;
 public class AttackTrigger : MonoBehaviour {
 
 	bool attackMode = false;
-	int currentEnemyId = 0;
+	int currEnemyId = 0;
+
 	public GameObject[] enemyObjects;
 
 	GameObject player;
+	public GameObject camera;
 
 	AudioSource evilLaugh;
 
@@ -24,10 +26,10 @@ public class AttackTrigger : MonoBehaviour {
 			player = col.gameObject;
 
 			attackMode = true;
-			int currEnemyId = 0;
 			foreach (GameObject enemyObj in enemyObjects) {
 
 				Animator enemyAnimator = enemyObj.GetComponentInChildren<Animator> ();
+				NavMeshAgent enemyAgent = enemyObj.GetComponentInChildren<NavMeshAgent> ();
 
 				// enemies all stand up to face player
 				enemyAnimator.SetBool ("isSitting", false);
@@ -49,16 +51,28 @@ public class AttackTrigger : MonoBehaviour {
 	}
 
 
-	void Start () {
 
-	
+
+	void Start () {
 	}
 	
 	void Update () {
 
-		if (attackMode) {
+
+
+			
+		Animator enemyAnimator = enemyObjects[1].GetComponentInChildren<Animator> ();
+		NavMeshAgent enemyAgent = enemyObjects[1].GetComponentInChildren<NavMeshAgent> ();
+		if (player != null) {
+			if (enemyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 3) {
+				Debug.Log (enemyAnimator.GetCurrentAnimatorStateInfo(0));
+				enemyAgent.destination = player.transform.position + player.transform.forward;
+				enemyAgent.speed = 1;
+				enemyObjects[1].transform.LookAt (player.transform);			
+			}
 
 		}
-	
+
+
 	}
 }
