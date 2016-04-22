@@ -14,10 +14,13 @@ public class InputScript : MonoBehaviour
     float speed;
 
     // ========= graveyard region starts ================
-    bool isOn;
+    public bool isDoorLeverToggled;
     bool isCloseToDoorLever;
     float delayTime;
     float delay;
+
+	GameObject graveyardLeftExitDoor;
+	Animator graveyardLeftExitDoorAnimator;
     // ========= graveyard region ends ================
 
 
@@ -30,10 +33,13 @@ public class InputScript : MonoBehaviour
 
 
         // ========= graveyard region starts ================
-        isOn = false;
+        isDoorLeverToggled = false;
         isCloseToDoorLever = false;
         delayTime = 0.15f;
         delay = 0.0f;
+
+		graveyardLeftExitDoor = GameObject.FindGameObjectWithTag ("GraveyardLeftExitDoor");
+		graveyardLeftExitDoorAnimator = graveyardLeftExitDoor.GetComponent<Animator> ();
         // ========= graveyard region ends ================
 
     }
@@ -133,22 +139,25 @@ public class InputScript : MonoBehaviour
         }
 
 
-
-        
         // ========= graveyard code starts ==============
         if (Input.GetKey(KeyCode.F) && isCloseToDoorLever && Time.time > delay)
-        {
+		{   
             delay = Time.time + delayTime;
             GameObject lever = GameObject.Find("LeverPivot");
-            if (!isOn)
+            if (!isDoorLeverToggled)
             {
                 lever.transform.rotation = Quaternion.Lerp(lever.transform.rotation, Quaternion.Euler(0, 0, 15), Time.time * 2.0f);
-                isOn = true;
+				graveyardLeftExitDoorAnimator.SetBool ("GateOpen", false);
+				isDoorLeverToggled = true;
+				Debug.Log(isDoorLeverToggled);
+
             }
-            else if (isOn)
+            else if (isDoorLeverToggled)
             {
                 lever.transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 9), Quaternion.Euler(0, 0, 345), Time.time * 2.0f);
-                isOn = false;
+				graveyardLeftExitDoorAnimator.SetBool ("GateOpen", true);
+				isDoorLeverToggled = false;
+				Debug.Log(isDoorLeverToggled);
             }
         }
         // ========= graveyard region ends ============
