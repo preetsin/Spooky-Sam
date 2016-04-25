@@ -14,13 +14,9 @@ public class InputScript : MonoBehaviour
     float speed;
 
     // ========= graveyard region starts ================
-    public bool isDoorLeverToggled;
-    bool isCloseToDoorLever;
-    float delayTime;
     float delay;
-
-	GameObject graveyardLeftExitDoor;
-	Animator graveyardLeftExitDoorAnimator;
+    DoorLever doorLever;
+    GraveyardExitDoor graveyardExitDoor;
     // ========= graveyard region ends ================
 
 
@@ -33,13 +29,9 @@ public class InputScript : MonoBehaviour
 
 
         // ========= graveyard region starts ================
-        isDoorLeverToggled = false;
-        isCloseToDoorLever = false;
-        delayTime = 0.15f;
         delay = 0.0f;
-
-		graveyardLeftExitDoor = GameObject.FindGameObjectWithTag ("GraveyardLeftExitDoor");
-		graveyardLeftExitDoorAnimator = graveyardLeftExitDoor.GetComponent<Animator> ();
+        doorLever = new DoorLever();
+        graveyardExitDoor = new GraveyardExitDoor();
         // ========= graveyard region ends ================
 
     }
@@ -154,24 +146,21 @@ public class InputScript : MonoBehaviour
 
 
         // ========= graveyard code starts ==============
-        if (Input.GetKey(KeyCode.F) && isCloseToDoorLever && Time.time > delay)
+        if (Input.GetKey(KeyCode.F) && doorLever.CloseToDoorLever && Time.time > delay)
 		{   
-            delay = Time.time + delayTime;
+            delay = Time.time + doorLever.DelayTime;
             GameObject lever = GameObject.Find("LeverPivot");
-            if (!isDoorLeverToggled)
+            if (!doorLever.Toggled)
             {
                 lever.transform.rotation = Quaternion.Lerp(lever.transform.rotation, Quaternion.Euler(0, 0, 15), Time.time * 2.0f);
-				graveyardLeftExitDoorAnimator.SetBool ("GateOpen", false);
-				isDoorLeverToggled = true;
-				Debug.Log(isDoorLeverToggled);
-
+                graveyardExitDoor.Open();
+				doorLever.Toggled = true;
             }
-            else if (isDoorLeverToggled)
+            else if (doorLever.Toggled)
             {
                 lever.transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 9), Quaternion.Euler(0, 0, 345), Time.time * 2.0f);
-				graveyardLeftExitDoorAnimator.SetBool ("GateOpen", true);
-				isDoorLeverToggled = false;
-				Debug.Log(isDoorLeverToggled);
+                graveyardExitDoor.Close();
+                doorLever.Toggled = false;
             }
         }
         // ========= graveyard region ends ============
@@ -183,7 +172,7 @@ public class InputScript : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // ========= graveyard region starts ===========
-        if (other.CompareTag("GraveyardDoorLever")) { isCloseToDoorLever = true; }
+        if (other.CompareTag("GraveyardDoorLever")) { doorLever.CloseToDoorLever = true; }
         // ========= graveyard region ends ============
     }
 
@@ -191,7 +180,7 @@ public class InputScript : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         // ========= graveyard code starts ==============
-        if (other.CompareTag("GraveyardDoorLever")) { isCloseToDoorLever = false; }
+        if (other.CompareTag("GraveyardDoorLever")) { doorLever.CloseToDoorLever = false; }
         // ========= graveyard code ends ==============
     }
 
