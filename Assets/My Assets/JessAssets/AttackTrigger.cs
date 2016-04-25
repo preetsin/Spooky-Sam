@@ -36,7 +36,7 @@ public class AttackTrigger : MonoBehaviour {
 				enemyAnimator.SetBool ("isKneeling", false);
 				enemyAnimator.SetBool ("isWalking", false);
 
-				if (currEnemyId == 1) {
+				if (currEnemyId == 1) { // middle clown
 					enemyAnimator.SetTrigger ("Laugh");
 					evilLaugh = enemyObj.GetComponentInChildren<AudioSource> ();
 					evilLaugh.Play ();
@@ -57,18 +57,23 @@ public class AttackTrigger : MonoBehaviour {
 	}
 	
 	void Update () {
-
-
-
 			
 		Animator enemyAnimator = enemyObjects[1].GetComponentInChildren<Animator> ();
 		NavMeshAgent enemyAgent = enemyObjects[1].GetComponentInChildren<NavMeshAgent> ();
+
 		if (player != null) {
-			if (enemyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 3) {
-				Debug.Log (enemyAnimator.GetCurrentAnimatorStateInfo(0));
+			
+			if (enemyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1) {
+				
 				enemyAgent.destination = player.transform.position + player.transform.forward;
-				enemyAgent.speed = 1;
-				enemyObjects[1].transform.LookAt (player.transform);			
+				if (enemyAgent.transform.position != enemyAgent.destination) {
+					enemyAnimator.SetBool ("isWalking", true);
+					enemyObjects [1].transform.LookAt (player.transform);	
+				} else {
+					enemyAnimator.SetBool ("isWalking", false);
+				}
+	
+
 			}
 
 		}
