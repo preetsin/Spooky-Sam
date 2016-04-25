@@ -6,13 +6,13 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class InputScript : MonoBehaviour
 {
-
+    
     public bool isAttacking;
     public int WeaponState;
     Animator anim;
     CharacterController controller;
     float speed;
-
+    Vector3 moveDirection = Vector3.zero;
     // ========= graveyard region starts ================
     bool isOn;
     bool isCloseToDoorLever;
@@ -84,10 +84,25 @@ public class InputScript : MonoBehaviour
             speed = 3f;
 
         }
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && controller.isGrounded)
         {
             anim.SetTrigger("Jump");
+            moveDirection.y = 10f;
+
+
         }
+
+
+        moveDirection.y -= 20 * Time.deltaTime;
+        controller.Move(moveDirection * Time.deltaTime);
+    
+    // GetComponent<CharacterController>().height = 1.2f;
+    //GetComponent<CharacterController>().SimpleMove(new Vector3(0, 0, 0.9f));
+    //Invoke("resetController", 0.4f); 
+
+
+
+      
 
         if (Input.GetButtonDown("Fire1"))
         {
@@ -107,12 +122,14 @@ public class InputScript : MonoBehaviour
             if (anim.GetBool("Crouch") == false)
             {
                 anim.SetBool("Crouch", true);
-                GetComponent<CharacterController>().height = 0.4f;
-                GetComponent<CharacterController>().center = new Vector3(0,0.4f,0);
+                controller.height = 0.4f;
+                controller.center = new Vector3(0,0.4f,0);
             }
             else
             {
                 anim.SetBool("Crouch", false);
+                controller.height = 1.8f;
+                controller.center = new Vector3(0, 0.9f, 0);
             }
         }
         if (Input.GetKey(KeyCode.Alpha1))
@@ -174,6 +191,7 @@ public class InputScript : MonoBehaviour
 
     void OnTriggerStay(Collider other) { }
 
+    
 
 
 }
