@@ -14,7 +14,6 @@ public class Outfitter : MonoBehaviour
 	[SerializeField]
 	public List<WeaponSlot> weapons;
 	
-	// Use this for initialization
 	void Start () 
 	{
 		ac = GetComponentInChildren<InputScript>();
@@ -32,7 +31,6 @@ public class Outfitter : MonoBehaviour
 		oldWeaponIndex=ac.WeaponState;
 	}
 	
-	// Update is called once per frame
 	void Update () 
 	{
 		if(ac.WeaponState!=oldWeaponIndex)

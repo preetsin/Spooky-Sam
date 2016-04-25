@@ -121,22 +121,36 @@ public class InputScript : MonoBehaviour
                 anim.SetBool("Crouch", false);
             }
         }
-        if (Input.GetKey(KeyCode.Alpha1))
-        {
-            if (GetComponent<PlayerWeapons>().weapons.Contains(1))
-            {
-                WeaponState = 1;
-                GetComponent<Outfitter>().weapons[1].models[0].enabled = true;
-            }
-        }
-        if (Input.GetKey(KeyCode.Alpha0))
-        {
-            GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
-            GetComponent<Outfitter>().weapons[2].models[0].enabled = false;
-            GetComponent<Outfitter>().weapons[3].models[0].enabled = false;
-            GetComponent<Outfitter>().weapons[4].models[0].enabled = false;
-            GetComponent<Outfitter>().weapons[0].models[0].enabled = true;
-        }
+
+
+		if (Input.GetKey(KeyCode.Alpha1)) {
+
+			Debug.Log (GetComponent<PlayerWeapons> ().weapons);
+
+			if (GetComponent<PlayerWeapons> ().weapons.Contains (1)) { //Hammer
+				
+				GetComponent<Outfitter>().weapons[1].models[0].enabled = true;
+				GetComponent<Outfitter>().weapons[2].models[0].enabled = false;
+
+			} else if (GetComponent<PlayerWeapons> ().weapons.Contains (2)) { //Sword
+				GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
+				GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
+			}
+
+		}
+
+
+		if (Input.GetKey(KeyCode.Alpha0))
+		{
+			GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
+			GetComponent<Outfitter>().weapons[2].models[0].enabled = false;
+			GetComponent<Outfitter>().weapons[3].models[0].enabled = false;
+			GetComponent<Outfitter>().weapons[4].models[0].enabled = false;
+			GetComponent<Outfitter>().weapons[0].models[0].enabled = true;
+		}
+
+
+
 
 
         // ========= graveyard code starts ==============
