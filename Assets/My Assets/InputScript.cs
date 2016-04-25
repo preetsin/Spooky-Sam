@@ -98,9 +98,10 @@ public class InputScript : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             isAttacking = true;
-            anim.SetTrigger("Punch");
+			anim.SetTrigger("Punch");
             
         }
+
 
         if (Input.GetButtonUp("Fire1"))
         {

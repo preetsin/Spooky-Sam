@@ -15,6 +15,12 @@ public class Clown_huddle : MonoBehaviour {
 		animator.SetBool ("isSitting", sit);
 
 	}
+
+	void OnTriggerEnter(Collider col) {
+		Debug.Log ("HIT!!");
+		animator.SetTrigger ("respondToAttack");
+
+	}
 	
 	void Update () {
 	
