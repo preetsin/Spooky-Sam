@@ -8,6 +8,9 @@ public class Clown_huddle : MonoBehaviour {
 	public bool kneel = false;
 	public bool sit = false;
 
+	public AudioSource swordHitSFX;
+
+
 
 	void Start () {
 		agent = GetComponent<NavMeshAgent> ();
@@ -19,6 +22,7 @@ public class Clown_huddle : MonoBehaviour {
 	void OnTriggerEnter(Collider col) {
 		Debug.Log ("HIT!!");
 		animator.SetTrigger ("respondToAttack");
+		swordHitSFX.Play ();
 
 	}
 	
