@@ -14,10 +14,9 @@ public class InputScript : MonoBehaviour
     float speed;
     Vector3 moveDirection = Vector3.zero;
     // ========= graveyard region starts ================
-    bool isOn;
-    bool isCloseToDoorLever;
-    float delayTime;
     float delay;
+    DoorLever doorLever;
+    GraveyardExitDoor graveyardExitDoor;
     // ========= graveyard region ends ================
 
 
@@ -30,10 +29,9 @@ public class InputScript : MonoBehaviour
 
 
         // ========= graveyard region starts ================
-        isOn = false;
-        isCloseToDoorLever = false;
-        delayTime = 0.15f;
         delay = 0.0f;
+        doorLever = new DoorLever();
+        graveyardExitDoor = new GraveyardExitDoor();
         // ========= graveyard region ends ================
 
     }
@@ -107,9 +105,10 @@ public class InputScript : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             isAttacking = true;
-            anim.SetTrigger("Punch");
+			anim.SetTrigger("Punch");
             
         }
+
 
         if (Input.GetButtonUp("Fire1"))
         {
@@ -132,40 +131,54 @@ public class InputScript : MonoBehaviour
                 controller.center = new Vector3(0, 0.9f, 0);
             }
         }
-        if (Input.GetKey(KeyCode.Alpha1))
-        {
-            if (GetComponent<PlayerWeapons>().weapons.Contains(1))
-            {
-                WeaponState = 1;
-                GetComponent<Outfitter>().weapons[1].models[0].enabled = true;
-            }
-        }
-        if (Input.GetKey(KeyCode.Alpha0))
-        {
-            GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
-            GetComponent<Outfitter>().weapons[2].models[0].enabled = false;
-            GetComponent<Outfitter>().weapons[3].models[0].enabled = false;
-            GetComponent<Outfitter>().weapons[4].models[0].enabled = false;
-            GetComponent<Outfitter>().weapons[0].models[0].enabled = true;
-        }
+
+
+		if (Input.GetKey(KeyCode.Alpha1)) {
+
+			Debug.Log (GetComponent<PlayerWeapons> ().weapons);
+
+			if (GetComponent<PlayerWeapons> ().weapons.Contains (1)) { //Hammer
+				
+				GetComponent<Outfitter>().weapons[1].models[0].enabled = true;
+				GetComponent<Outfitter>().weapons[2].models[0].enabled = false;
+
+			} else if (GetComponent<PlayerWeapons> ().weapons.Contains (2)) { //Sword
+				GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
+				GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
+			}
+
+		}
+
+
+		if (Input.GetKey(KeyCode.Alpha0))
+		{
+			GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
+			GetComponent<Outfitter>().weapons[2].models[0].enabled = false;
+			GetComponent<Outfitter>().weapons[3].models[0].enabled = false;
+			GetComponent<Outfitter>().weapons[4].models[0].enabled = false;
+			GetComponent<Outfitter>().weapons[0].models[0].enabled = true;
+		}
 
 
 
-        
+
+
         // ========= graveyard code starts ==============
-        if (Input.GetKey(KeyCode.F) && isCloseToDoorLever && Time.time > delay)
-        {
-            delay = Time.time + delayTime;
+        if (Input.GetKey(KeyCode.F) && doorLever.CloseToDoorLever && Time.time > delay)
+		{   
+            delay = Time.time + doorLever.DelayTime;
             GameObject lever = GameObject.Find("LeverPivot");
-            if (!isOn)
+            if (!doorLever.Toggled)
             {
                 lever.transform.rotation = Quaternion.Lerp(lever.transform.rotation, Quaternion.Euler(0, 0, 15), Time.time * 2.0f);
-                isOn = true;
+                graveyardExitDoor.Open();
+				doorLever.Toggled = true;
             }
-            else if (isOn)
+            else if (doorLever.Toggled)
             {
                 lever.transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 9), Quaternion.Euler(0, 0, 345), Time.time * 2.0f);
-                isOn = false;
+                graveyardExitDoor.Close();
+                doorLever.Toggled = false;
             }
         }
         // ========= graveyard region ends ============
@@ -177,7 +190,7 @@ public class InputScript : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // ========= graveyard region starts ===========
-        if (other.CompareTag("GraveyardDoorLever")) { isCloseToDoorLever = true; }
+        if (other.CompareTag("GraveyardDoorLever")) { doorLever.CloseToDoorLever = true; }
         // ========= graveyard region ends ============
     }
 
@@ -185,7 +198,7 @@ public class InputScript : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         // ========= graveyard code starts ==============
-        if (other.CompareTag("GraveyardDoorLever")) { isCloseToDoorLever = false; }
+        if (other.CompareTag("GraveyardDoorLever")) { doorLever.CloseToDoorLever = false; }
         // ========= graveyard code ends ==============
     }
 

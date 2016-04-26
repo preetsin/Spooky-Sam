@@ -12,5 +12,6 @@ public class PlayerWeapons : MonoBehaviour {
 
     public void setWeapons(int i) {
         weapons.Add(i);
+		Debug.Log ("Weapon Added");
     }
 }

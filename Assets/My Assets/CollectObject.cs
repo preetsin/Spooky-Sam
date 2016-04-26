@@ -3,16 +3,30 @@ using System.Collections;
 
 public class CollectObject : MonoBehaviour {
 
-    void OnTriggerEnter(Collider other) {
-        if (other.gameObject.tag == "Player")
-        {
-            if (gameObject.tag == "Hammer") {
-                Debug.Log("HammerTime");
-                other.gameObject.GetComponent<PlayerWeapons>().setWeapons(1);
-                other.GetComponent<Animator>().SetTrigger("Pickup");
-                GetComponent<MeshRenderer>().enabled = false;
+	int weaponId = 0;
 
-            }
-        }
-    }
+	void OnTriggerEnter(Collider col) {
+
+		if (col.gameObject.tag == "Player") {
+			switch (gameObject.tag) {
+			case "Hammer":
+				weaponId = 1;
+				break;
+
+			case "Sword":
+				weaponId = 2;
+				break;
+			}
+
+			Debug.Log ("Weapon ID: " + weaponId);
+
+			col.gameObject.GetComponent<PlayerWeapons> ().setWeapons (weaponId);
+			col.GetComponent<Animator> ().SetTrigger ("Pickup");
+			GetComponent<MeshRenderer> ().enabled = false;
+
+		}
+
+	}
+
+
 }
