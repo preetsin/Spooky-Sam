@@ -9,6 +9,8 @@ public class Clown_huddle : MonoBehaviour {
 	public bool sit = false;
 
 	public AudioSource swordHitSFX;
+	public AudioSource swordHitForKillSFX;
+
 
 
 
