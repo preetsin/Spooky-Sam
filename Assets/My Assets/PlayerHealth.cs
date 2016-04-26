@@ -16,7 +16,6 @@ public class PlayerHealth : MonoBehaviour {
         StartCoroutine(giveHealth());
     }
     
-
     IEnumerator giveHealth()
     {
         while (true)
