@@ -16,9 +16,13 @@ public class CollectObject : MonoBehaviour {
 			case "Sword":
 				weaponId = 2;
 				break;
-			}
+          
+            case "Spear":
+				weaponId = 3;
+                break;
+        }
 
-			Debug.Log ("Weapon ID: " + weaponId);
+        Debug.Log ("Weapon ID: " + weaponId);
 
 			col.gameObject.GetComponent<PlayerWeapons> ().setWeapons (weaponId);
 			col.GetComponent<Animator> ().SetTrigger ("Pickup");

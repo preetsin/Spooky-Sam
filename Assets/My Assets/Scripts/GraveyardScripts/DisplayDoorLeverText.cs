@@ -12,7 +12,7 @@ public class DisplayDoorLeverText : MonoBehaviour {
 
 	void OnTriggerStay()
 	{
-		leverText.text = "Press Some Button";
+		leverText.text = "Press 'F' to open exit door";
 	}
 
 	void OnTriggerEnter(Collider other)

@@ -145,9 +145,13 @@ public class InputScript : MonoBehaviour
 			} else if (GetComponent<PlayerWeapons> ().weapons.Contains (2)) { //Sword
 				GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
 				GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
-			}
 
-		}
+			} else if (GetComponent<PlayerWeapons>().weapons.Contains (3)) { //Rifle or Spear
+                GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
+                GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
+            }
+
+        }
 
 
 		if (Input.GetKey(KeyCode.Alpha0))
