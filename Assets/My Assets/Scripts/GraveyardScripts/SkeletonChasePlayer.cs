@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ChasePlayer : MonoBehaviour {
+public class SkeletonChasePlayer : MonoBehaviour {
 
     public Transform player;
     static Animator anim;
@@ -10,7 +10,7 @@ public class ChasePlayer : MonoBehaviour {
 
     void Start ()
     {
-        walkingSpeed = 0.006f;
+        walkingSpeed = 0.01f;
         anim = GetComponent<Animator>();
 	}
 	
@@ -25,7 +25,7 @@ public class ChasePlayer : MonoBehaviour {
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
 
             anim.SetBool("isSpawn", false);
-            if (direction.magnitude > 2)
+            if (direction.magnitude > 0.8)
             {
                 this.transform.Translate(0, 0, walkingSpeed);
                 anim.SetBool("isWalking", true);
