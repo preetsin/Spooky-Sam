@@ -17,17 +17,21 @@ public class SkeletonArmedChasePlayer : MonoBehaviour {
 
 	void Update ()
     {
-        agent.destination = player.position;
-
         Vector3 distance = player.position - this.transform.position;
-        distance.y = 0; 
+        distance.y = 0;
+
+        if (distance.magnitude < 5)
+        {
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(distance), 0.1f);
+        }
+
 
         anim.SetBool("isSpawn", false);
         if (distance.magnitude > 2)
         {
+            agent.destination = player.position;
             anim.SetBool("isWalking", true);
             anim.SetBool("isAttacking", false);
-
         }
         else 
         {
