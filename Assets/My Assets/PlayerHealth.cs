@@ -3,35 +3,37 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour {
-    public int health;
     public GameObject canvas;
 	public Slider healthBar;
 	private int timer;
 
 
 	void Awake () {
-        health = 50;
 
-		healthBar.value = health;
+		healthBar.value = Prefs.playerHealth;
 		timer = 0;
 	}
     
 
     void accumulatehealth()
     {
-		health += 10;
+		Prefs.playerHealth += 10;
 
-		if (health > 100) {
+		if (Prefs.playerHealth > 100) {
 			
-			health = 100;
+			Prefs.playerHealth = 100;
 
 		}
-		healthBar.value = health;
+		healthBar.value = Prefs.playerHealth;
+
 
     }
 
-    // Update is called once per frame
     void Update () {
+
+		healthBar.value = Prefs.playerHealth;
+		//this line is necessary to make sure any changes to the 
+		//health made outside of this script are shown on the healthbar
 
 		timer++;
 
