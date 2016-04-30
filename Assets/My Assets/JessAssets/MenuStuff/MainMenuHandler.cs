@@ -11,24 +11,34 @@ public class MainMenuHandler : MonoBehaviour {
 		switch(bttnName) {
 
 		case "playBttn":
-			Debug.Log ("PLAY the GAME, ya psycho!");	
+			Debug.Log ("Play bttn selected");	
 			SceneManager.LoadScene ("houseScene");
 			break;
+
+		case "howToPlayBttn":
+			Debug.Log ("How to Play bttn selected");	
+			SceneManager.LoadScene ("howToPlayScene");
+			break;
+
+		case "settingsBttn":
+			Debug.Log ("Settings bttn selected");	
+			SceneManager.LoadScene ("settingsScene");
+			break;
+
+		case "creditsBttn":
+			Debug.Log ("credits bttn selected");	
+			SceneManager.LoadScene ("creditsScene");
+			break;
+
+		case "backBttn":
+			Debug.Log ("back bttn selected");	
+			SceneManager.LoadScene ("MainMenu");
+			break;
+
 		default:
 			Debug.Log ("Error: no button detected");
 			break;
 
 		}
-	}
-
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }
