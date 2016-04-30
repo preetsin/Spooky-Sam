@@ -3,42 +3,39 @@ using System.Collections;
 
 public class SkeletonArmedChasePlayer : MonoBehaviour {
 
-	public Transform player;
+    public Transform player;
     static Animator anim;
-    public float walkingSpeed;
+    NavMeshAgent agent;
 
 
     void Start ()
     {
-        walkingSpeed = 0.006f;
         anim = GetComponent<Animator>();
-	}
+        agent = GetComponent<NavMeshAgent>();
+    }
 	
 
 	void Update ()
     {
-	
-        if(Vector3.Distance(player.position, this.transform.position) < 100)
+        agent.destination = player.position;
+
+        Vector3 distance = player.position - this.transform.position;
+        distance.y = 0; 
+
+        anim.SetBool("isSpawn", false);
+        if (distance.magnitude > 2)
         {
-            Vector3 direction = player.position - this.transform.position;
-            direction.y = 0;
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
-
-            anim.SetBool("isSpawn", false);
-            if (direction.magnitude > 2)
-            {
-                this.transform.Translate(0, 0, walkingSpeed);
-                anim.SetBool("isWalking", true);
-                anim.SetBool("isAttacking", false);
-
-            }
-            else 
-            {
-                anim.SetBool("isWalking", false);
-                anim.SetBool("isAttacking", true);
-            }
+            anim.SetBool("isWalking", true);
+            anim.SetBool("isAttacking", false);
 
         }
+        else 
+        {
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isAttacking", true);
+        }
+
+        
 
 	}
 }

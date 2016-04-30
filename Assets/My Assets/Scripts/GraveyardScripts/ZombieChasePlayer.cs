@@ -5,39 +5,33 @@ public class ZombieChasePlayer : MonoBehaviour {
 
     public Transform player;
     static Animator anim;
-    public float walkingSpeed;
+    NavMeshAgent agent;
 
 
     void Start()
     {
-        walkingSpeed = 0.004f;
         anim = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
 
     void Update()
     {
+        agent.destination = player.position;
 
-        if (Vector3.Distance(player.position, this.transform.position) < 100)
-        {
-            Vector3 direction = player.position - this.transform.position;
-            direction.y = 0;
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
+        Vector3 distance = player.position - this.transform.position;
+        distance.y = 0;
 
-            if (direction.magnitude > 1.5)
+        if (distance.magnitude > 1.5)
             {
-                this.transform.Translate(0, 0, walkingSpeed);
                 anim.SetBool("isWalking", true);
                 anim.SetBool("isAttacking", false);
-
             }
             else
             {
                 anim.SetBool("isWalking", false);
                 anim.SetBool("isAttacking", true);
             }
-
-        }
-
+        
     }
 }
