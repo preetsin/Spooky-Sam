@@ -4,41 +4,41 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour {
     public int health;
-    //Text text;
-    string healthText;
     public GameObject canvas;
-	// Use this for initialization
-	void Awake () {
-        health = 60;
-	}
-    void Start()
-    {
-        StartCoroutine(giveHealth());
-    }
-    
-    IEnumerator giveHealth()
-    {
-        while (true)
-        {
-            addTenPercent();
-            Debug.Log("Added Health");
-            healthText = health.ToString();
-            Text text = canvas.transform.Find("Health").GetComponent<Text>();
-            text.text = healthText;
-            yield return new WaitForSeconds(10);
-        }
-    }
+	public Slider healthBar;
+	private int timer;
 
-    void addTenPercent()
+
+	void Awake () {
+        health = 50;
+
+		healthBar.value = health;
+		timer = 0;
+	}
+    
+
+    void accumulatehealth()
     {
-        health += (health / 10);
-        health %= 100;
+		health += 10;
+
+		if (health > 100) {
+			
+			health = 100;
+
+		}
+		healthBar.value = health;
+
     }
 
     // Update is called once per frame
     void Update () {
-	    
 
+		timer++;
+
+		if (timer == 600) { // seconds
+			timer = 0;
+			accumulatehealth ();
+		}
 
 	}
 }
