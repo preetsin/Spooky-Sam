@@ -36,7 +36,6 @@ public class Spawner : MonoBehaviour {
 
                 Vector3 spawnPosition = new Vector3(randomX, positionY, randomZ);
                 Quaternion spawnRotation = Quaternion.identity;
-                AI.GetComponent<Chase>().player = chase.transform;
 
                 Instantiate(AI, spawnPosition, spawnRotation);
                 yield return new WaitForSeconds(spawnWait);

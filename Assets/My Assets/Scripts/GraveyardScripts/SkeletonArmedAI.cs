@@ -6,10 +6,10 @@ public class SkeletonArmedAI {
     GameObject skeletonArmedAI;
     Animator animator;
 
-    public SkeletonArmedAI()
+    public SkeletonArmedAI(Animator animator)
     {
         skeletonArmedAI = GameObject.FindGameObjectWithTag("SkeletonArmedAI");
-        animator = skeletonArmedAI.GetComponent<Animator>();
+        this.animator = animator;
     }
 
     public void PlaySpawningAnim(bool spawn) { animator.SetBool("isSpawn", spawn); }

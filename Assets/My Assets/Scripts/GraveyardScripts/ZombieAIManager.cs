@@ -5,10 +5,13 @@ public class ZombieAIManager : MonoBehaviour {
 
     GraveyardZombieAI graveyardZombieAI;
     GameObject player;
+    Animator animator;
 
     void Start()
     {
-        graveyardZombieAI = new GraveyardZombieAI();
+        animator = GetComponent<Animator>();
+
+        graveyardZombieAI = new GraveyardZombieAI(animator);
         player = GameObject.FindGameObjectWithTag("Player");
     }
 

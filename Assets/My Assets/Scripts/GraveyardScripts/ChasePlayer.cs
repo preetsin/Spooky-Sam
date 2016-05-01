@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Chase : MonoBehaviour {
+public class ChasePlayer : MonoBehaviour {
 
-    public Transform player;
+    GameObject player;
     NavMeshAgent agent;
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
-        agent.destination = player.position;
+        agent.destination = player.transform.position;
     }
 }

@@ -5,10 +5,12 @@ public class SkeletonArmedAIManager : MonoBehaviour {
 
     SkeletonArmedAI skeletonArmedAI;
     GameObject player;
+    Animator animator;
 
     void Start()
     {
-        skeletonArmedAI = new SkeletonArmedAI();
+        animator = GetComponent<Animator>();
+        skeletonArmedAI = new SkeletonArmedAI(animator);
         player = GameObject.FindGameObjectWithTag("Player");
     }
     

@@ -6,10 +6,10 @@ public class GraveyardZombieAI {
     GameObject zombieAI;
     Animator animator;
 
-    public GraveyardZombieAI()
+    public GraveyardZombieAI(Animator animator)
     {
         zombieAI = GameObject.FindGameObjectWithTag("ZombieAI");
-        animator = zombieAI.GetComponent<Animator>();
+        this.animator = animator;
     }
 
     public void PlayWalkingAnim(bool walking) { animator.SetBool("isWalking", walking); }
