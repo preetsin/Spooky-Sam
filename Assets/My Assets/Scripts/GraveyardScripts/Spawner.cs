@@ -6,10 +6,12 @@ public class Spawner : MonoBehaviour {
     public GameObject AI;
     public GameObject chase;
     //public Vector3 spawnValues;
-    public int hazardCount;
+    public int aiCount;
     public float spawnWait;
     public float startWait;
     public float waveWait;
+    public int totalWaves;
+    int waveCounter;
 
     float positionX;
     float positionY;
@@ -20,6 +22,7 @@ public class Spawner : MonoBehaviour {
         positionX = this.transform.position.x;
         positionY = this.transform.position.y;
         positionZ = this.transform.position.z;
+        waveCounter = 0;
 
         StartCoroutine(SpawnWaves());
     }
@@ -27,9 +30,9 @@ public class Spawner : MonoBehaviour {
     IEnumerator SpawnWaves()
     {
         yield return new WaitForSeconds(startWait);
-        while (true)
+        while (waveCounter < totalWaves)
         {
-            for (int i = 0; i < hazardCount; i++)
+            for (int i = 0; i < aiCount; i++)
             {
                 float randomX = random(positionX);
                 float randomZ = random(positionZ);
@@ -41,6 +44,8 @@ public class Spawner : MonoBehaviour {
                 yield return new WaitForSeconds(spawnWait);
             }
             yield return new WaitForSeconds(waveWait);
+
+            waveCounter++;
         }
     }
 

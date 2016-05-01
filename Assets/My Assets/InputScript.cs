@@ -17,6 +17,7 @@ public class InputScript : MonoBehaviour
     float delay;
     DoorLever doorLever;
     GraveyardExitDoor graveyardExitDoor;
+    GraveyardController graveyardController;
     // ========= graveyard region ends ================
 
 
@@ -32,6 +33,7 @@ public class InputScript : MonoBehaviour
         delay = 0.0f;
         doorLever = new DoorLever();
         graveyardExitDoor = new GraveyardExitDoor();
+        graveyardController = new GraveyardController();
         // ========= graveyard region ends ================
 
     }
@@ -177,6 +179,7 @@ public class InputScript : MonoBehaviour
                 lever.transform.rotation = Quaternion.Lerp(lever.transform.rotation, Quaternion.Euler(0, 0, 15), Time.time * 2.0f);
                 graveyardExitDoor.Open();
 				doorLever.Toggled = true;
+                graveyardController.StartSpawningAIs();
             }
             else if (doorLever.Toggled)
             {
