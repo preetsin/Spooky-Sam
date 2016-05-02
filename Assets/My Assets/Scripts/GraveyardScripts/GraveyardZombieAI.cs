@@ -16,4 +16,5 @@ public class GraveyardZombieAI {
 
     public void PlayAttackingAnim(bool attacking) { animator.SetBool("isAttacking", attacking); }
 
+    public void PlayDeathAnim(bool isDead) { animator.SetBool("isDead", isDead); }
 }

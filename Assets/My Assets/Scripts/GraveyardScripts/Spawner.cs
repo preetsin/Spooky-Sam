@@ -49,9 +49,9 @@ public class Spawner : MonoBehaviour {
         }
     }
 
-    private float random(float positionCoordinate)
+    private float random(float xyz)
     {
-        return Random.Range(positionCoordinate - 10, positionCoordinate + 10);
+        return Random.Range(xyz - 10, xyz + 10);
     }
    
 

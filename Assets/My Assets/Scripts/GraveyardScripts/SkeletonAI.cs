@@ -14,8 +14,12 @@ public class SkeletonAI  {
 
     public void PlaySpawningAnim (bool spawn) { animator.SetBool("isSpawn", spawn); }
 
-    public void PlayWalkingAnim (bool walking) { animator.SetBool("isWalking", walking); }
+    public void PlayWalkingAnim (bool isWalking) { animator.SetBool("isWalking", isWalking); }
 
-    public void PlayAttackingAnim(bool attacking) { animator.SetBool("isAttacking", attacking); }
-    
+    public void PlayAttackingAnim(bool isAttacking) { animator.SetBool("isAttacking", isAttacking); }
+
+    public void PlayHitAnim(bool isHit) { animator.SetBool("isHit", isHit); }
+
+    public void PlayDeathAnim(bool isDead) { animator.SetBool("isDead", isDead); }
+
 }

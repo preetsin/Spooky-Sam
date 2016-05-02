@@ -6,14 +6,27 @@ public class ChasePlayer : MonoBehaviour {
     GameObject player;
     NavMeshAgent agent;
 
+    public bool chasing;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
+
+        chasing = true;
     }
 
     void Update()
     {
-        agent.destination = player.transform.position;
+        if (chasing)
+        {
+            agent.destination = player.transform.position;
+        }
+        else
+        {
+            return;
+        }
+
+
     }
 }

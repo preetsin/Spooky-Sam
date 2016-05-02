@@ -12,6 +12,10 @@ public class GraveyardController {
     GraveyardExitDoor graveyardExitDoor;
     GraveyardEntranceDoor graveyardEntranceDoor;
 
+    GameObject[] lightPosts;
+
+    ParticleEmitter fog;
+
     float delay;
 
 
@@ -25,6 +29,8 @@ public class GraveyardController {
         graveyardEntranceDoor = new GraveyardEntranceDoor();
         delay = 0.0f;
 
+        lightPosts = GameObject.FindGameObjectsWithTag("GraveyardLightpost");
+        fog = GameObject.Find("Fog").GetComponent<ParticleEmitter>();
     }
 
 
@@ -37,6 +43,7 @@ public class GraveyardController {
         }
     }
 
+    // Used in InputScript Update() to handle DoorLever functionallity when 'F' pressed to toggle off and on 
     public void DoorLeverToggledHandler()
     {
 
@@ -51,23 +58,30 @@ public class GraveyardController {
                 graveyardEntranceDoor.Close();
                 doorLever.Toggled = true;
                 StartSpawningAIs();
+                TurnOffLights();
             }
             else if (doorLever.Toggled)
             {
                 lever.transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 9), Quaternion.Euler(0, 0, 345), Time.time * 2.0f);
                 graveyardExitDoor.Close();
+                fog.enabled = false;
                 graveyardEntranceDoor.Open(); // logic will change once level2 key thing sorted. 
                 doorLever.Toggled = false;
-                
             }
         }
-        
     }
-
+    
     public void CloseToDoorLeverHandler (Collider other, bool setBool)
     {
         if (other.CompareTag("GraveyardDoorLever")) { doorLever.CloseToDoorLever = setBool; }
     }
     
+    public void TurnOffLights()
+    {
+        foreach (GameObject lightPost in lightPosts)
+        {
+            lightPost.SetActive(false);
+        }
+    }
     
 }
