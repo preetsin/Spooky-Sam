@@ -14,9 +14,6 @@ public class InputScript : MonoBehaviour
     float speed;
     Vector3 moveDirection = Vector3.zero;
     // ========= graveyard region starts ================
-    float delay;
-    DoorLever doorLever;
-    GraveyardExitDoor graveyardExitDoor;
     GraveyardController graveyardController;
     // ========= graveyard region ends ================
 
@@ -30,9 +27,6 @@ public class InputScript : MonoBehaviour
 
 
         // ========= graveyard region starts ================
-        delay = 0.0f;
-        doorLever = new DoorLever();
-        graveyardExitDoor = new GraveyardExitDoor();
         graveyardController = new GraveyardController();
         // ========= graveyard region ends ================
 
@@ -169,27 +163,15 @@ public class InputScript : MonoBehaviour
 
 
 
-        // ========= graveyard code starts ==============
-        if (Input.GetKey(KeyCode.F) && doorLever.CloseToDoorLever && Time.time > delay)
-		{   
-            delay = Time.time + doorLever.DelayTime;
-            GameObject lever = GameObject.Find("LeverPivot");
-            if (!doorLever.Toggled)
-            {
-                lever.transform.rotation = Quaternion.Lerp(lever.transform.rotation, Quaternion.Euler(0, 0, 15), Time.time * 2.0f);
-                graveyardExitDoor.Open();
-				doorLever.Toggled = true;
-                graveyardController.StartSpawningAIs();
-            }
-            else if (doorLever.Toggled)
-            {
-                lever.transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 9), Quaternion.Euler(0, 0, 345), Time.time * 2.0f);
-                graveyardExitDoor.Close();
-                doorLever.Toggled = false;
-            }
-        }
-        // ========= graveyard region ends ============
         
+        if (Input.GetKey(KeyCode.F))
+		{
+            // ========= graveyard code starts ==============
+            graveyardController.DoorLeverToggledHandler();
+            // ========= graveyard region ends ============
+        }
+
+
 
 
     }
@@ -197,7 +179,7 @@ public class InputScript : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // ========= graveyard region starts ===========
-        if (other.CompareTag("GraveyardDoorLever")) { doorLever.CloseToDoorLever = true; }
+        graveyardController.CloseToDoorLeverHandler(other, true);
         // ========= graveyard region ends ============
     }
 
@@ -205,7 +187,7 @@ public class InputScript : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         // ========= graveyard code starts ==============
-        if (other.CompareTag("GraveyardDoorLever")) { doorLever.CloseToDoorLever = false; }
+        graveyardController.CloseToDoorLeverHandler(other, false);
         // ========= graveyard code ends ==============
     }
 
