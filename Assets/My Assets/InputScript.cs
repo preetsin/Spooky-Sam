@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
 
 
@@ -26,10 +27,13 @@ public class InputScript : MonoBehaviour
         WeaponState = 0;
 
 
-        // ========= graveyard region starts ================
-        graveyardController = new GraveyardController();
-        // ========= graveyard region ends ================
+        Debug.Log("Current Scene: " + SceneManager.GetActiveScene().name);
 
+
+        if (SceneManager.GetActiveScene().name.Equals("graveScene"))
+        {
+            graveyardController = new GraveyardController();
+        }
     }
 
     void Update()
@@ -89,14 +93,31 @@ public class InputScript : MonoBehaviour
 
         moveDirection.y -= 20 * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
-    
-    // GetComponent<CharacterController>().height = 1.2f;
-    //GetComponent<CharacterController>().SimpleMove(new Vector3(0, 0, 0.9f));
-    //Invoke("resetController", 0.4f); 
+
+        // GetComponent<CharacterController>().height = 1.2f;
+        //GetComponent<CharacterController>().SimpleMove(new Vector3(0, 0, 0.9f));
+        //Invoke("resetController", 0.4f); 
 
 
+        if (Input.GetButtonDown("Fire1"))
+        {
+            isAttacking = true;
+            if (anim.GetBool("HasGun") == true)
+            {
+                anim.SetBool("Shoot", true);
+            }
+            else
+            {
+                anim.SetTrigger("Punch");
+            }
+        }
 
-      
+        if (Input.GetButtonUp("Fire1"))
+        {
+            isAttacking = false;
+            anim.SetBool("Shoot", false);
+        }
+
 
         if (Input.GetButtonDown("Fire1"))
         {
@@ -142,7 +163,8 @@ public class InputScript : MonoBehaviour
 				GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
 				GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
 
-			} else if (GetComponent<PlayerWeapons>().weapons.Contains (3)) { //Rifle or Spear
+			} else if (GetComponent<PlayerWeapons>().weapons.Contains(3)) { //Gun
+                anim.SetBool("HasGun", true);
                 GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
                 GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
             }
@@ -166,8 +188,12 @@ public class InputScript : MonoBehaviour
         
         if (Input.GetKey(KeyCode.F))
 		{
+
             // ========= graveyard code starts ==============
-            graveyardController.DoorLeverToggledHandler();
+            if (SceneManager.GetActiveScene().name.Equals("graveScene"))
+            {
+                graveyardController.DoorLeverToggledHandler();
+            }
             // ========= graveyard region ends ============
         }
 
@@ -179,7 +205,10 @@ public class InputScript : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // ========= graveyard region starts ===========
-        graveyardController.CloseToDoorLeverHandler(other, true);
+        if (SceneManager.GetActiveScene().name.Equals("graveScene"))
+        {
+            graveyardController.CloseToDoorLeverHandler(other, true);
+        }
         // ========= graveyard region ends ============
     }
 
@@ -187,7 +216,10 @@ public class InputScript : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         // ========= graveyard code starts ==============
-        graveyardController.CloseToDoorLeverHandler(other, false);
+        if (SceneManager.GetActiveScene().name.Equals("graveScene"))
+        {
+            graveyardController.CloseToDoorLeverHandler(other, false);
+        }
         // ========= graveyard code ends ==============
     }
 

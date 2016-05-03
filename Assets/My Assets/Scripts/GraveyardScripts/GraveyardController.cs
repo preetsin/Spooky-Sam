@@ -14,15 +14,11 @@ public class GraveyardController {
 
     GameObject[] lightPosts;
 
-    ParticleEmitter fog;
-
     float delay;
-
 
     public GraveyardController()
     {
         graveyardController = GameObject.Find("GraveyardController");
-        spawnerScripts = graveyardController.GetComponents<Spawner>();
 
         doorLever = new DoorLever();
         graveyardExitDoor = new GraveyardExitDoor();
@@ -30,12 +26,12 @@ public class GraveyardController {
         delay = 0.0f;
 
         lightPosts = GameObject.FindGameObjectsWithTag("GraveyardLightpost");
-        fog = GameObject.Find("Fog").GetComponent<ParticleEmitter>();
     }
 
 
     public void StartSpawningAIs()
     {
+        spawnerScripts = graveyardController.GetComponents<Spawner>();
         graveyardController.GetComponents<Spawner>();
         foreach(Spawner spawnerScript in spawnerScripts)
         {
@@ -64,7 +60,6 @@ public class GraveyardController {
             {
                 lever.transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 9), Quaternion.Euler(0, 0, 345), Time.time * 2.0f);
                 graveyardExitDoor.Close();
-                fog.enabled = false;
                 graveyardEntranceDoor.Open(); // logic will change once level2 key thing sorted. 
                 doorLever.Toggled = false;
             }
