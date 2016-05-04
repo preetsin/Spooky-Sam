@@ -1686,8 +1686,8 @@ ModelImporter:
     - serializedVersion: 16
       name: StandUp01
       takeName: Take 001
-      firstFrame: 831
-      lastFrame: 891
+      firstFrame: 861
+      lastFrame: 861
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
