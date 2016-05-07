@@ -171,10 +171,11 @@ public class InputScript : MonoBehaviour
                 GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
                 GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
 
-                //if (SceneManager.GetActiveScene().name.Equals("graveScene"))
-                //{
-                //    graveyardController.EnableCrosshair(true);
-                //}
+                if (SceneManager.GetActiveScene().name.Equals("graveScene"))
+                {
+                    graveyardController.EnableGunShooting(true);
+                    //graveyardController.EnableCrosshair(true);
+                }
 
             }
 

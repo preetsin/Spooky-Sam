@@ -84,6 +84,11 @@ public class GraveyardController {
         }
     }
 
+    public void EnableGunShooting(bool enable)
+    {
+        GameObject.Find("BulletEmitter").GetComponent<Shoot>().enabled = enable;
+    }
+
     public void EnableCrosshair(bool enable)
     {
         crosshairScript.enabled = enable;
