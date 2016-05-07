@@ -13,6 +13,8 @@ public class GraveyardController {
     GraveyardEntranceDoor graveyardEntranceDoor;
 
     GameObject[] lightPosts;
+    Crosshair crosshairScript;
+
 
     float delay;
 
@@ -26,6 +28,9 @@ public class GraveyardController {
         delay = 0.0f;
 
         lightPosts = GameObject.FindGameObjectsWithTag("GraveyardLightpost");
+
+        GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        crosshairScript = mainCamera.GetComponent<Crosshair>();
     }
 
 
@@ -77,6 +82,12 @@ public class GraveyardController {
         {
             lightPost.SetActive(false);
         }
+    }
+
+    public void EnableCrosshair(bool enable)
+    {
+        crosshairScript.enabled = enable;
+        Cursor.visible = false;
     }
     
 }

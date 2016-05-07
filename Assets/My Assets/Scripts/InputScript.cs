@@ -170,6 +170,12 @@ public class InputScript : MonoBehaviour
                 anim.SetBool("HasGun", true);
                 GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
                 GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
+
+                if (SceneManager.GetActiveScene().name.Equals("graveScene"))
+                {
+                    graveyardController.EnableCrosshair(true);
+                }
+
             }
 
         }
