@@ -17,7 +17,7 @@ public class CollectObject : MonoBehaviour {
 				weaponId = 2;
 				break;
           
-            case "Spear":
+            case "SpacePistol":
 				weaponId = 3;
                 break;
         }

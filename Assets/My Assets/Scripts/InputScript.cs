@@ -166,7 +166,7 @@ public class InputScript : MonoBehaviour
 				GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
 				GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
 
-			} else if (GetComponent<PlayerWeapons>().weapons.Contains(3)) { //Gun
+			} else if (GetComponent<PlayerWeapons>().weapons.Contains(3)) { //SpacePistol
                 anim.SetBool("HasGun", true);
                 GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
                 GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
