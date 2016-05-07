@@ -6,15 +6,18 @@ public class BulletScript : MonoBehaviour {
 	
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("SkeletonAI") || other.CompareTag("SkeletonArmedAI") || other.CompareTag("ZombieAI"))
+        if (other.CompareTag("SkeletonAI") || 
+            other.CompareTag("SkeletonArmedAI") || 
+            other.CompareTag("ZombieAI") || 
+            other.name == "Terrain" || 
+            other.CompareTag("SingleDoor"))
         {
             Destroy(this.gameObject);
-            Debug.Log("Bullet Destroyed by AI");
-        }
-        else if (other.name == "Terrain")
-        {
-            Destroy(this.gameObject);
-            Debug.Log("Bullet Destroyed by Terrain");
+            if (other.CompareTag("SingleDoor"))
+            {
+                Debug.Log("Bullet Destroyed ");
+            }
+            
         }
 
     }
