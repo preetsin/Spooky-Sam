@@ -67,7 +67,7 @@ public class ZombieAIManager : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && health > 0)
+        if (other.CompareTag("Bullet") && health > 0)
         {
             chasePlayer.chasing = false;
             health -= 5;
