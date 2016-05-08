@@ -17,6 +17,8 @@ public class PlayerHealth : MonoBehaviour {
 
     void accumulatehealth()
     {
+
+
 		Prefs.playerHealth += 10;
 
 		if (Prefs.playerHealth > 100) {

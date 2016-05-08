@@ -25,7 +25,7 @@ public class AlertViewHandler : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetButtonUp ("Fire1")) {
+		if (Input.GetKeyDown(KeyCode.Escape)) {
 			dismissAlert ();
 		}
 	}
