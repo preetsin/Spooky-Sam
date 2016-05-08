@@ -6,11 +6,13 @@ public class SingleDoorShootdown : MonoBehaviour {
     Animator animator;
     int doorHealth;
 
+    GraveyardDataManager graveyardDataManager;
+
     void Start()
     {
         animator = GetComponent<Animator>();
         doorHealth = 100;
-
+        graveyardDataManager = GraveyardDataManager.GetInstance();
     }
 
     void Update()
@@ -19,7 +21,11 @@ public class SingleDoorShootdown : MonoBehaviour {
         {
             animator.SetBool("OpenAndBreak", true);
             animator.SetBool("FalldownIdle", true);
+
+            if (this.gameObject.name == "SingleDoor") { graveyardDataManager.OutsideSingleDoorBroken = true; }
+            if (this.gameObject.name == "SingleDoor (1)") { graveyardDataManager.InsideSingleDoorBroken = true; }
         }
+        
     }
 
     void OnTriggerEnter(Collider other)

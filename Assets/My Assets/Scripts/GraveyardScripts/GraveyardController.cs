@@ -3,6 +3,7 @@ using System.Collections;
 
 public class GraveyardController {
 
+    GraveyardDataManager graveyardDataManager;
     Spawner spawnerScript;
     Spawner[] spawnerScripts;
     GameObject player;
@@ -32,6 +33,8 @@ public class GraveyardController {
         GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         crosshairScript = mainCamera.GetComponent<Crosshair>();
         flickerLight = graveyardController.GetComponent<FlickerLight>();
+
+        graveyardDataManager = GraveyardDataManager.GetInstance();
 
     }
 
@@ -63,12 +66,13 @@ public class GraveyardController {
                 StartSpawningAIs();
                 //TurnOffLights();
                 flickerLight.enabled = true;
+                graveyardDataManager.ExitDoorLeverToggled = true;
             }
             else if (doorLever.Toggled)
             {
                 lever.transform.rotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 9), Quaternion.Euler(0, 0, 345), Time.time * 2.0f);
                 graveyardExitDoor.Close();
-                graveyardEntranceDoor.Open(); // logic will change once level2 key thing sorted. 
+                //graveyardEntranceDoor.Open(); // logic will change once level2 key thing sorted. 
                 doorLever.Toggled = false;
             }
         }
