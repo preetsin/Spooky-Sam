@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.UI;
 
 
 
@@ -17,6 +18,10 @@ public class InputScript : MonoBehaviour
     // ========= graveyard region starts ================
     GraveyardController graveyardController;
     // ========= graveyard region ends ================
+
+
+	public Image weaponIconView;
+	public Sprite[] weaponIcons;
 
 
     void Start() {
@@ -101,6 +106,8 @@ public class InputScript : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1"))
         {
+
+
             isAttacking = true;
             if (anim.GetBool("HasGun") == true)
             {
@@ -129,8 +136,7 @@ public class InputScript : MonoBehaviour
 
         if (Input.GetButtonUp("Fire1"))
         {
-            isAttacking = false;
-          
+            isAttacking = false;          
 
         }
         if (Input.GetKey(KeyCode.C))
@@ -161,15 +167,20 @@ public class InputScript : MonoBehaviour
                 WeaponState = 1;
 				GetComponent<Outfitter>().weapons[1].models[0].enabled = true;
 				GetComponent<Outfitter>().weapons[2].models[0].enabled = false;
+//				weaponIconView.sprite = weaponIcons [0];
+
 
 			} else if (GetComponent<PlayerWeapons> ().weapons.Contains (2)) { //Sword
 				GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
 				GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
+				weaponIconView.sprite = weaponIcons [1];
 
 			} else if (GetComponent<PlayerWeapons>().weapons.Contains(3)) { //SpacePistol
                 anim.SetBool("HasGun", true);
                 GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
                 GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
+//				weaponIconView.sprite = weaponIcons [2];
+
 
                 if (SceneManager.GetActiveScene().name.Equals("graveScene"))
                 {

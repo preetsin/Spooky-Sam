@@ -7,6 +7,9 @@ public class fireCollider : MonoBehaviour {
 		if (col.tag == "Player") {
 			Prefs.playerHealth -= 5;
 		}
+
+		AlertViewHandler alert = FindObjectOfType<AlertViewHandler> ();
+		alert.showAlert ("You walked into the fire... what a fuckhead");
 	}
 
 
