@@ -74,5 +74,19 @@ public class ZombieAIManager : MonoBehaviour {
             zombieAI.PlayWalkingAnim(false);
             Debug.Log("zombie health: " + health);
         }
+
+        if (other.tag == "Player")
+        {
+            Prefs.playerHealth -= 5;
+
+            //AlertViewHandler alert = FindObjectOfType<AlertViewHandler>();
+            //alert.showAlert("You hit by Zombie");
+        }
     }
+
+    void OnTriggerStay()
+    {
+        Prefs.playerHealth -= 2;
+    }
+
 }

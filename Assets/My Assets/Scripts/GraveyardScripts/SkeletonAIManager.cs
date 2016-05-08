@@ -82,6 +82,20 @@ public class SkeletonAIManager : MonoBehaviour {
             skeletonAI.PlayWalkingAnim(false);
             Debug.Log("Skeleton health: " + health);
         }
+
+        if (other.tag == "Player")
+        {
+            Prefs.playerHealth -= 5;
+
+            //AlertViewHandler alert = FindObjectOfType<AlertViewHandler>();
+            //alert.showAlert("You hit by SkeletonAI");
+
+        }
     }
-    
+
+    void OnTriggerStay()
+    {
+        Prefs.playerHealth -= 2;
+    }
+
 }

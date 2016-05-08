@@ -167,10 +167,10 @@ public class InputScript : MonoBehaviour
                 WeaponState = 1;
 				GetComponent<Outfitter>().weapons[1].models[0].enabled = true;
 				GetComponent<Outfitter>().weapons[2].models[0].enabled = false;
-//				weaponIconView.sprite = weaponIcons [0];
+                weaponIconView.sprite = weaponIcons[0];
 
 
-			} else if (GetComponent<PlayerWeapons> ().weapons.Contains (2)) { //Sword
+            } else if (GetComponent<PlayerWeapons> ().weapons.Contains (2)) { //Sword
 				GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
 				GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
 				weaponIconView.sprite = weaponIcons [1];
@@ -179,7 +179,7 @@ public class InputScript : MonoBehaviour
                 anim.SetBool("HasGun", true);
                 GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
                 GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
-//				weaponIconView.sprite = weaponIcons [2];
+                weaponIconView.sprite = weaponIcons[2];
 
 
                 if (SceneManager.GetActiveScene().name.Equals("graveScene"))

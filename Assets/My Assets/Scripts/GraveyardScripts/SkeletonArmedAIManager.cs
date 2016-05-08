@@ -82,5 +82,18 @@ public class SkeletonArmedAIManager : MonoBehaviour {
             skeletonArmedAI.PlayWalkingAnim(false);
             Debug.Log("Skeleton health: " + health);
         }
+
+        if (other.tag == "Player")
+        {
+            Prefs.playerHealth -= 5;
+
+            //AlertViewHandler alert = FindObjectOfType<AlertViewHandler>();
+            //alert.showAlert("You hit by Armed Skeleton");
+        }
+    }
+
+    void OnTriggerStay()
+    {
+        Prefs.playerHealth -= 2;
     }
 }
