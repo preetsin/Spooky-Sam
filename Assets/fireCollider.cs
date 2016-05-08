@@ -8,8 +8,8 @@ public class fireCollider : MonoBehaviour {
 			Prefs.playerHealth -= 5;
 		}
 
-		AlertViewHandler alert = FindObjectOfType<AlertViewHandler> ();
-		alert.showAlert ("You walked into the fire... what a fuckhead");
+//		AlertViewHandler alert = FindObjectOfType<AlertViewHandler> ();
+//		alert.showAlert ("You walked into the fire... what a loser");
 	}
 
 

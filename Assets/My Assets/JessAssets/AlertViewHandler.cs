@@ -7,12 +7,17 @@ public class AlertViewHandler : MonoBehaviour {
 	public Image alertView;
 	public Text alertText;
 	public static bool alertIsShowing;
+	private ArrayList alertQueue;
+	int cursor;
 
 
 
 
 	// Use this for initialization
 	void Start () {
+		alertQueue = new ArrayList ();
+		cursor = 0;
+
 		alertIsShowing = false;
 		if (alertText != null) {
 			alertText.enabled = false;
@@ -24,25 +29,46 @@ public class AlertViewHandler : MonoBehaviour {
 
 	}
 
+
+
+
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.Escape)) {
-			dismissAlert ();
+		if (Input.GetKeyUp(KeyCode.Escape)) {
+
+			if (cursor < alertQueue.Count) {
+				//show next alert in queue
+				Debug.Log("getting next in queue");
+				string nextInQueue = (string) alertQueue [cursor];
+				alertIsShowing = false;
+				showAlert (nextInQueue);
+				cursor++;
+			} else {
+				dismissAlert ();
+			}
+
 		}
 	}
 
 
 	public void showAlert(string whatToSay) {
+		if (!alertIsShowing) {
+			if (alertText != null) {
+				alertText.enabled = true;
+			}
 
-		if (alertText != null) {
-			alertText.enabled = true;
+			if (alertView != null) {
+				alertView.enabled = true;
+			}
+			alertText.text = whatToSay;
+			alertIsShowing = true;
+		} else {
+			//make so only adds if it is not already in queue... nod ouble-ups
+			Debug.Log ("Add to queue: " + whatToSay);
+			alertQueue.Add (whatToSay);
 		}
 
-		if (alertView != null) {
-			alertView.enabled = true;
-		}
 
-		alertText.text = whatToSay;
-		alertIsShowing = true;
+
 
 	}
 
