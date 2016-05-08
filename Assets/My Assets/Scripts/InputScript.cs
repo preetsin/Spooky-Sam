@@ -215,6 +215,11 @@ public class InputScript : MonoBehaviour
             {
                 graveyardController.DoorLeverToggledHandler();
             }
+            if (SceneManager.GetActiveScene().name.Equals("houseScene"))
+            {
+
+                GameObject.FindGameObjectWithTag("GraveyardDoorLever").GetComponent<SecretDoor>().SecretDoorLeverToggledHandler();
+            }
             // ========= graveyard region ends ============
         }
 
@@ -229,6 +234,13 @@ public class InputScript : MonoBehaviour
         if (SceneManager.GetActiveScene().name.Equals("graveScene"))
         {
             graveyardController.CloseToDoorLeverHandler(other, true);
+        }
+        if (SceneManager.GetActiveScene().name.Equals("houseScene"))
+        {
+            if (other.gameObject.tag == "GraveyardDoorLever")
+            {
+                other.gameObject.GetComponent<SecretDoor>().closeToLever = true;
+            }
         }
         // ========= graveyard region ends ============
     }
