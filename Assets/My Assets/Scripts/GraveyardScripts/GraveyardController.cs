@@ -12,9 +12,9 @@ public class GraveyardController {
     GraveyardExitDoor graveyardExitDoor;
     GraveyardEntranceDoor graveyardEntranceDoor;
 
-    GameObject[] lightPosts;
+    //GameObject[] lightPosts;
     Crosshair crosshairScript;
-
+    FlickerLight flickerLight;
 
     float delay;
 
@@ -27,10 +27,12 @@ public class GraveyardController {
         graveyardEntranceDoor = new GraveyardEntranceDoor();
         delay = 0.0f;
 
-        lightPosts = GameObject.FindGameObjectsWithTag("GraveyardLightpost");
+        //lightPosts = GameObject.FindGameObjectsWithTag("GraveyardLightpost");
 
         GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         crosshairScript = mainCamera.GetComponent<Crosshair>();
+        flickerLight = graveyardController.GetComponent<FlickerLight>();
+
     }
 
 
@@ -59,7 +61,8 @@ public class GraveyardController {
                 graveyardEntranceDoor.Close();
                 doorLever.Toggled = true;
                 StartSpawningAIs();
-                TurnOffLights();
+                //TurnOffLights();
+                flickerLight.enabled = true;
             }
             else if (doorLever.Toggled)
             {
@@ -76,13 +79,17 @@ public class GraveyardController {
         if (other.CompareTag("GraveyardDoorLever")) { doorLever.CloseToDoorLever = setBool; }
     }
     
-    public void TurnOffLights()
-    {
-        foreach (GameObject lightPost in lightPosts)
-        {
-            lightPost.SetActive(false);
-        }
-    }
+    //public void TurnOffLights()
+    //{
+    //    lightPosts[1].SetActive(false);
+    //    lightPosts[2].SetActive(false);
+    //    lightPosts[3].SetActive(false);
+
+    //    //foreach (GameObject lightPost in lightPosts)
+    //    //{
+    //    //    lightPost.SetActive(false);
+    //    //}
+    //}
 
     public void EnableGunShooting(bool enable)
     {
