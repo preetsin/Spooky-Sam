@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class InputScript : MonoBehaviour
 {
+    public bool torchOn;
     public bool inTunnel;
     public bool isAttacking;
     public int WeaponState;
@@ -20,13 +21,14 @@ public class InputScript : MonoBehaviour
     // ========= graveyard region ends ================
 
 
-	public Image weaponIconView;
-	public Sprite[] weaponIcons;
+    public Image weaponIconView;
+    public Sprite[] weaponIcons;
 
 
     void Start() {
+        torchOn = false;
         speed = 5f;
-         anim = GetComponent< Animator > ();
+        anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         isAttacking = false;
         WeaponState = 0;
@@ -64,7 +66,7 @@ public class InputScript : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Q))
         {
-          
+
             anim.SetBool("StrafeLeft", true);
             controller.SimpleMove(transform.TransformDirection(Vector3.left) * 5f);
         }
@@ -102,7 +104,21 @@ public class InputScript : MonoBehaviour
         // GetComponent<CharacterController>().height = 1.2f;
         //GetComponent<CharacterController>().SimpleMove(new Vector3(0, 0, 0.9f));
         //Invoke("resetController", 0.4f); 
-
+        if (Input.GetButtonDown("Fire2") && anim.GetBool("HasTorch") == true)
+        {
+            if (!torchOn)
+            {
+                torchOn = true;
+                anim.SetBool("ShiningTorch", true);
+                GameObject.FindGameObjectWithTag("Torch").GetComponent<Light>().intensity = 2;
+            }
+            else
+            {
+                torchOn = false;
+                anim.SetBool("ShiningTorch", false);
+                GameObject.FindGameObjectWithTag("Torch").GetComponent<Light>().intensity = 0;
+            }
+        }
 
         if (Input.GetButtonDown("Fire1"))
         {
@@ -129,14 +145,14 @@ public class InputScript : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             isAttacking = true;
-			anim.SetTrigger("Punch");
-            
+            anim.SetTrigger("Punch");
+
         }
 
 
         if (Input.GetButtonUp("Fire1"))
         {
-            isAttacking = false;          
+            isAttacking = false;
 
         }
         if (Input.GetKey(KeyCode.C))
@@ -145,7 +161,7 @@ public class InputScript : MonoBehaviour
             {
                 anim.SetBool("Crouch", true);
                 controller.height = 0.4f;
-                controller.center = new Vector3(0,0.4f,0);
+                controller.center = new Vector3(0, 0.4f, 0);
             }
             else
             {
@@ -159,23 +175,29 @@ public class InputScript : MonoBehaviour
         }
 
 
-		if (Input.GetKey(KeyCode.Alpha1)) {
+        if (Input.GetKey(KeyCode.Alpha1)) {
+            anim.SetBool("HasTorch", false);
+            GetComponent<Outfitter>().weapons[2].models[0].enabled = false;
+            Debug.Log(GetComponent<PlayerWeapons>().weapons);
 
-			Debug.Log (GetComponent<PlayerWeapons> ().weapons);
-
-			if (GetComponent<PlayerWeapons> ().weapons.Contains (1)) { //Hammer
+            if (GetComponent<PlayerWeapons>().weapons.Contains(1))
+            { //Hammer
                 WeaponState = 1;
-				GetComponent<Outfitter>().weapons[1].models[0].enabled = true;
-				GetComponent<Outfitter>().weapons[2].models[0].enabled = false;
+                GetComponent<Outfitter>().weapons[1].models[0].enabled = true;
+                GetComponent<Outfitter>().weapons[2].models[0].enabled = false;
                 weaponIconView.sprite = weaponIcons[0];
 
 
-            } else if (GetComponent<PlayerWeapons> ().weapons.Contains (2)) { //Sword
-				GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
-				GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
-				weaponIconView.sprite = weaponIcons [1];
+            }
+            else if (GetComponent<PlayerWeapons>().weapons.Contains(2))
+            { //Sword
+                GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
+                GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
+                weaponIconView.sprite = weaponIcons[1];
 
-			} else if (GetComponent<PlayerWeapons>().weapons.Contains(3)) { //SpacePistol
+            }
+            else if (GetComponent<PlayerWeapons>().weapons.Contains(3))
+            { //SpacePistol
                 anim.SetBool("HasGun", true);
                 GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
                 GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
@@ -190,11 +212,22 @@ public class InputScript : MonoBehaviour
 
             }
 
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+
+            anim.SetBool("HasTorch", true);
+            GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
+            GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
+
         }
 
+    
 
 		if (Input.GetKey(KeyCode.Alpha0))
 		{
+            anim.SetBool("HasTorch", false);
 			GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
 			GetComponent<Outfitter>().weapons[2].models[0].enabled = false;
 			GetComponent<Outfitter>().weapons[3].models[0].enabled = false;

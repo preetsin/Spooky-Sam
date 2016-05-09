@@ -54,6 +54,7 @@ public class FlingItem : MonoBehaviour
     {
         if (entered)
         {
+            Debug.Log("Box Fling");
             Vector3 dir = target.transform.position - box.transform.position;
             dir = dir.normalized;
             GameObject flingBox = (GameObject)Instantiate(flingBoxy, box.transform.position, Quaternion.identity);

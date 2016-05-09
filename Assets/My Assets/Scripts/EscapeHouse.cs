@@ -35,6 +35,8 @@ public class EscapeHouse : MonoBehaviour
             {
                 escaped = true;
                 Debug.Log("escaped");
+                AlertViewHandler alertView = FindObjectOfType<AlertViewHandler>();
+                alertView.showAlert("It looks like a way out!");
             }
             if (escaped)
             {
