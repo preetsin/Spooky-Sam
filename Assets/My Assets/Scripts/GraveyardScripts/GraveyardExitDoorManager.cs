@@ -4,6 +4,7 @@ using System.Collections;
 public class GraveyardExitDoorManager : MonoBehaviour {
 
     GameObject graveyardController;
+    GraveyardController graveyardControllerScript;
     GraveyardDataManager graveyardDataManager;
     GraveyardExitDoor graveyardExitDoor;
     FlickerLight flickerLight;
@@ -13,6 +14,7 @@ public class GraveyardExitDoorManager : MonoBehaviour {
         graveyardDataManager = GraveyardDataManager.GetInstance();
         graveyardExitDoor = new GraveyardExitDoor();
         graveyardController = GameObject.Find("GraveyardController");
+        graveyardControllerScript = new GraveyardController();
         flickerLight = graveyardController.GetComponent<FlickerLight>();
         doorClosed = false;
     }
@@ -32,6 +34,7 @@ public class GraveyardExitDoorManager : MonoBehaviour {
             {
                 graveyardExitDoor.Open();
                 flickerLight.enabled = false;
+                graveyardControllerScript.TurnOnLights();
             }
             
         }

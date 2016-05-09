@@ -13,7 +13,7 @@ public class GraveyardController {
     GraveyardExitDoor graveyardExitDoor;
     GraveyardEntranceDoor graveyardEntranceDoor;
 
-    //GameObject[] lightPosts;
+    GameObject[] lightPosts;
     Crosshair crosshairScript;
     FlickerLight flickerLight;
 
@@ -28,7 +28,7 @@ public class GraveyardController {
         graveyardEntranceDoor = new GraveyardEntranceDoor();
         delay = 0.0f;
 
-        //lightPosts = GameObject.FindGameObjectsWithTag("GraveyardLightpost");
+        lightPosts = GameObject.FindGameObjectsWithTag("GraveyardLightpost");
 
         GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         crosshairScript = mainCamera.GetComponent<Crosshair>();
@@ -83,6 +83,14 @@ public class GraveyardController {
         if (other.CompareTag("GraveyardDoorLever")) { doorLever.CloseToDoorLever = setBool; }
     }
     
+    public void TurnOnLights()
+    {
+        foreach (GameObject lightPost in lightPosts)
+        {
+            lightPost.SetActive(true);
+        }
+    }
+
     //public void TurnOffLights()
     //{
     //    lightPosts[1].SetActive(false);
