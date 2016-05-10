@@ -8,7 +8,7 @@ public class SkeletonAIManager : MonoBehaviour {
     Animator animator;
     ChasePlayer chasePlayer;
 
-    int health;
+    float health;
     float delay;
     float hitPause;
     bool canHit;
@@ -20,7 +20,7 @@ public class SkeletonAIManager : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         chasePlayer = this.GetComponent<ChasePlayer>();
 
-        health = 50;
+        health = 100;
         delay = 0;
         hitPause = 1.5f;
         canHit = true;
@@ -95,7 +95,7 @@ public class SkeletonAIManager : MonoBehaviour {
 
     void OnTriggerStay()
     {
-        Prefs.playerHealth -= 2;
+        Prefs.playerHealth -= 1;
     }
 
 }

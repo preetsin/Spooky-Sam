@@ -4,10 +4,12 @@ using System.Collections;
 public class FlickerLight : MonoBehaviour {
 
     GameObject[] lightPosts;
+    FlickerLight flickerLights;
 
     void Start()
     {
         lightPosts = GameObject.FindGameObjectsWithTag("GraveyardLightpost");
+        StartFlickeringSound();
     }
 
     void FixedUpdate () {
@@ -25,5 +27,13 @@ public class FlickerLight : MonoBehaviour {
 
         if (randomNumber >= 0.6 && randomNumber <= 0.7) { lightPosts[3].SetActive(true); }
         else { lightPosts[3].SetActive(false); }
+    }
+
+    private void StartFlickeringSound()
+    {
+        foreach (GameObject lightPost in lightPosts)
+        {
+            lightPost.GetComponent<AudioSource>().enabled = true;
+        }
     }
 }
