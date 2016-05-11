@@ -17,6 +17,8 @@ public class GraveyardController {
     Crosshair crosshairScript;
     FlickerLight flickerLight;
 
+    ParticleSystem particleSystem;
+
     float delay;
 
     public GraveyardController()
@@ -35,7 +37,7 @@ public class GraveyardController {
         flickerLight = graveyardController.GetComponent<FlickerLight>();
 
         graveyardDataManager = GraveyardDataManager.GetInstance();
-
+        
     }
 
 

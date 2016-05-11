@@ -5,6 +5,7 @@ public class SingleDoorShootdown : MonoBehaviour {
 
     Animator animator;
     int doorHealth;
+    AudioSource metalShot;
 
     GraveyardDataManager graveyardDataManager;
 
@@ -13,6 +14,7 @@ public class SingleDoorShootdown : MonoBehaviour {
         animator = GetComponent<Animator>();
         doorHealth = 100;
         graveyardDataManager = GraveyardDataManager.GetInstance();
+        metalShot = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -33,6 +35,7 @@ public class SingleDoorShootdown : MonoBehaviour {
         if (other.CompareTag("Bullet") && doorHealth > 0)
         {
             doorHealth -= 10;
+            metalShot.Play();
             Debug.Log("DoorHealth " + doorHealth);
         }
     }

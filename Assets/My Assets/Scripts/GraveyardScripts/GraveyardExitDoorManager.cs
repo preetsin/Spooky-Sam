@@ -27,7 +27,8 @@ public class GraveyardExitDoorManager : MonoBehaviour {
         {
             graveyardExitDoor.Close();
             doorClosed = true;
-        } 
+            graveyardDataManager.EnemiesKilled = false;
+        }
         else
         {
             if (graveyardDataManager.ExitDoorLeverToggled == true && doorClosed == true)
@@ -35,8 +36,9 @@ public class GraveyardExitDoorManager : MonoBehaviour {
                 graveyardExitDoor.Open();
                 flickerLight.enabled = false;
                 graveyardControllerScript.TurnOnLights();
+                graveyardDataManager.EnemiesKilled = true;
             }
-            
+
         }
         
 	}
