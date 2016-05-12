@@ -32,8 +32,8 @@ public class AlertViewHandler : MonoBehaviour {
 
 
 
-	void Update () {
-		if (Input.GetKeyUp(KeyCode.Escape)) {
+    void Update() {
+        if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp(KeyCode.Return)) {
 
 			if (cursor < alertQueue.Count) {
 				//show next alert in queue
@@ -44,6 +44,7 @@ public class AlertViewHandler : MonoBehaviour {
 				cursor++;
 			} else {
 				dismissAlert ();
+                Time.timeScale = 1;
 			}
 
 		}

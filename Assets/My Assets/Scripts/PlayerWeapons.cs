@@ -14,4 +14,11 @@ public class PlayerWeapons : MonoBehaviour {
         weapons.Add(i);
 		Debug.Log ("Weapon Added");
     }
+
+    public bool hasWeapon(int i) {
+        if (weapons.Contains(i)) {
+            return true;
+        }
+        return false;
+    }
 }

@@ -110,13 +110,13 @@ public class InputScript : MonoBehaviour
             {
                 torchOn = true;
                 anim.SetBool("ShiningTorch", true);
-                GameObject.FindGameObjectWithTag("Torch").GetComponent<Light>().intensity = 2;
+                GameObject.FindGameObjectWithTag("Torchy").GetComponent<Light>().intensity = 2;
             }
             else
             {
                 torchOn = false;
                 anim.SetBool("ShiningTorch", false);
-                GameObject.FindGameObjectWithTag("Torch").GetComponent<Light>().intensity = 0;
+                GameObject.FindGameObjectWithTag("Torchy").GetComponent<Light>().intensity = 0;
             }
         }
 
@@ -177,6 +177,8 @@ public class InputScript : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Alpha1)) {
             anim.SetBool("HasTorch", false);
+            anim.SetBool("ShiningTorch", false);
+            GameObject.FindGameObjectWithTag("Torchy").GetComponent<Light>().intensity = 0;
             GetComponent<Outfitter>().weapons[2].models[0].enabled = false;
             Debug.Log(GetComponent<PlayerWeapons>().weapons);
 
@@ -211,16 +213,20 @@ public class InputScript : MonoBehaviour
                 }
 
             }
+          
 
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-
-            anim.SetBool("HasTorch", true);
-            GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
-            GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
-
+            if (GetComponent<PlayerWeapons>().weapons.Contains(4))
+            {
+                anim.SetBool("HasTorch", true);
+                GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
+                GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
+                //weaponIconView.sprite = weaponIcons[3];
+            }
+        
         }
 
     

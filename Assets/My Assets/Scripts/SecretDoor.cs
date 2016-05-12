@@ -7,9 +7,12 @@ public class SecretDoor : MonoBehaviour {
     public bool closeToLever;
     bool toggled;
 
+   
+
     public SecretDoor() {
         closeToLever = false;
         toggled = false;
+      
     }
      
     public void SecretDoorLeverToggledHandler()
@@ -20,7 +23,8 @@ public class SecretDoor : MonoBehaviour {
             if (!toggled)
             {
                    doorLeverPivot.transform.rotation = Quaternion.Lerp(doorLeverPivot.transform.rotation, Quaternion.Euler(0, 0, 15), Time.time * 2.0f);
-                   
+                  
+                   GetComponent<AudioSource>().Play();
                    openSecretDoor();
            }
             //else if (doorLever.Toggled)
@@ -35,6 +39,7 @@ public class SecretDoor : MonoBehaviour {
 
     void openSecretDoor() {
        secretDoor.transform.position += new Vector3(0f,-20f,0f);
+
         toggled = true;
     }
 

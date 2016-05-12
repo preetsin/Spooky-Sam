@@ -36,10 +36,16 @@ public class EscapeHouse : MonoBehaviour
                 escaped = true;
                 Debug.Log("escaped");
                 AlertViewHandler alertView = FindObjectOfType<AlertViewHandler>();
-                alertView.showAlert("It looks like a way out!");
+                if (HouseAlertManager.Instance.escapeMsg == false)
+                {
+                    alertView.showAlert("It looks like a way out! press 'c' to crouch");
+                    Time.timeScale = 0.0f;
+                    HouseAlertManager.Instance.escapeMsg = true;
+                }
             }
             if (escaped)
             {
+                
                 GetComponent<MeshRenderer>().enabled = false;
                 GetComponent<MeshCollider>().enabled = false;
                 brokenGrate.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;

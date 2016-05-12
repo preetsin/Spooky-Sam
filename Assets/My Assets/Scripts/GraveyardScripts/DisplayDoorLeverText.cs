@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class DisplayDoorLeverText : MonoBehaviour {
 
@@ -10,10 +11,20 @@ public class DisplayDoorLeverText : MonoBehaviour {
 		leverText = GameObject.Find ("LeverText").GetComponent<TextMesh> ();
 	}
 
-	void OnTriggerStay()
-	{
-		leverText.text = "Press 'F' to open exit door";
-	}
+    void OnTriggerStay()
+    {
+
+        if (SceneManager.GetActiveScene().name.Equals("graveScene"))
+        {
+            leverText.text = "Press 'F' to open exit door";
+        }
+        if (SceneManager.GetActiveScene().name.Equals("houseScene"))
+        {
+            leverText.text = "Press 'F' to pull lever";
+        }
+    }
+
+        
 
 	void OnTriggerEnter(Collider other)
 	{
