@@ -15,6 +15,10 @@ public class GhoulNav : MonoBehaviour
     Vector3 fwd;
     bool inRange;
     bool hasSpoke = false;
+    bool receivedHit = false;
+    GhoulHealth health;
+
+
     void Start() {
         hasTarget = false;
         inRange = false;
@@ -22,30 +26,45 @@ public class GhoulNav : MonoBehaviour
         targetId = 0;
         agent = GetComponent<NavMeshAgent>();
         agent.destination = targetDestinations[targetId].position;
-        animator.SetBool("IsWalking", true);
-        
+        //animator.SetBool("IsWalking", true);
+        health = GetComponent<GhoulHealth>();
         
     }
 
     void Update()
     {
-        fwd = gameObject.transform.TransformDirection(Vector3.forward);
+
+        if (GetComponent<GhoulHealth>().dead == false)
+        {
+            fwd = gameObject.transform.TransformDirection(Vector3.forward);
         // Debug.DrawRay(gameObject.transform.position + 
         //new Vector3(0f, 1f, 0f), fwd * 50, Color.green);
-        if (!trapped && !inRange) {
-            resetGhoul();
-            castForPlayer();
-            if (!hasTarget) {
-                handleNotChasing();
-            } else {
-                handleChasing();
-            }
-        } else {
-            freezeGhoul();
+        if (receivedHit)
+        {
+            health.decrementHealth(10);
+            receivedHit = false;
         }
+
+            if (!trapped && !inRange)
+            {
+                resetGhoul();
+                castForPlayer();
+                if (!hasTarget)
+                {
+                    handleNotChasing();
+                }
+                else
+                {
+                    handleChasing();
+                }
+            }
+            else
+            {
+                freezeGhoul();
+            }
+        }
+
     }
-
-
   
     void resetGhoul()
     {
@@ -102,39 +121,69 @@ public class GhoulNav : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other) {
-      
-        if (other.gameObject.tag == "Player") {
-            GetComponent<Animator>().SetBool("IsRunning", false);
-            GetComponent<Animator>().SetBool("IsWalking", false);
-            inRange = true;
-            StartCoroutine(attackIfInRange());
+        if (GetComponent<GhoulHealth>().dead == false)
+        {
+            if (other.gameObject.tag == "Player")
+            {
+                GetComponent<Animator>().SetBool("IsRunning", false);
+                GetComponent<Animator>().SetBool("IsWalking", false);
+                inRange = true;
+                StartCoroutine(attackIfInRange());
+            }
         }
     }
 
+    void OnTriggerStay(Collider other) {
+        if (GetComponent<GhoulHealth>().dead == false)
+        {
+
+            if (other.gameObject.tag == "Player")
+            {
+                if (other.gameObject.GetComponent<InputScript>().isAttacking == true)
+                {
+                    receivedHit = true;
+                   
+                    Debug.Log("Ghoul Sustained Damage");
+                    other.gameObject.GetComponent<InputScript>().isAttacking = false;
+                }
+            }
+
+        }
+    }
+    
     void OnTriggerExit(Collider other) {
-        if (other.gameObject.tag == "Player") {
-            inRange = false;
-            StopCoroutine(attackIfInRange());
-            resetGhoul(); 
+        if (GetComponent<GhoulHealth>().dead == false)
+        {
+            if (other.gameObject.tag == "Player")
+            {
+                inRange = false;
+                StopCoroutine(attackIfInRange());
+                resetGhoul();
+            }
+
         }
     }
 
  
     IEnumerator attackIfInRange() {
-        
-        while (inRange){
-           
-            Debug.Log("In range");
-            GetComponent<Animator>().SetTrigger("Attack");
-            Prefs.playerHealth -= 9;
-            yield return new WaitForSeconds(2f);
-        }
-        
+     
+            while (inRange)
+            {
+            if (GetComponent<GhoulHealth>().dead == false)
+            {
+                Debug.Log("In range");
+                GetComponent<Animator>().SetTrigger("Attack");
+                Prefs.playerHealth -= 9;
+                yield return new WaitForSeconds(2f);
+            }
+            else {
+                inRange = false;
+            }
+       }
     }
 
     IEnumerator waiter()
     {
-       
         while (trapped)
         {
             hasTarget = false;

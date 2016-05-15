@@ -10,7 +10,10 @@ public class HouseAlerts : MonoBehaviour {
     // Use this for initialization
 	void Start () {
         alertView = FindObjectOfType<AlertViewHandler>();
-        
+
+        alertView.showAlert("You awake in the house.  There’s a chill in your bones and something seems not quite right!");
+        alertView.showAlert("You must discover the secrets that lie within if you wish to survive.");
+        alertView.showAlert("Find your way to freedom");
     }
 
     void OnTriggerEnter(Collider other){

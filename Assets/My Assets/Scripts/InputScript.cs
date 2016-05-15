@@ -146,7 +146,7 @@ public class InputScript : MonoBehaviour
         {
             isAttacking = true;
             anim.SetTrigger("Punch");
-
+          
         }
 
 
@@ -197,7 +197,6 @@ public class InputScript : MonoBehaviour
             }
             else if (GetComponent<PlayerWeapons>().weapons.Contains(2))
             { //Sword
-				WeaponState = 2;
                 GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
                 GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
                 weaponIconView.sprite = weaponIcons[1];

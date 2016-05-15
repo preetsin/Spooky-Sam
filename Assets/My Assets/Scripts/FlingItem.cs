@@ -2,8 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class FlingItem : MonoBehaviour
-{
+public class FlingItem : MonoBehaviour{
     public GameObject target;
     public GameObject box;
     public GameObject flingBoxy;
