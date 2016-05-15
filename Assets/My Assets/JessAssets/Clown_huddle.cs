@@ -10,7 +10,7 @@ public class Clown_huddle : MonoBehaviour {
 	private int enemyhealth;
 
 	public AudioSource swordHitSFX;
-	public AudioSource swordHitForKillSFX;
+//	public AudioSource swordHitForKillSFX;
 
 
 
@@ -23,21 +23,17 @@ public class Clown_huddle : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col) {
-		Debug.Log ("HIT!!");
 		swordHitSFX.Play ();
 		if (enemyhealth <= 100) {
-			enemyhealth -= 100;
+			enemyhealth -= 25;
 			if (enemyhealth == 0) {
 				animator.SetTrigger ("dieClownDie");
 				animator.SetBool ("isDead", true);
 			} else {
 				animator.SetTrigger ("respondToAttack");
 			}
-		}
-
+		}		
 	}
 	
-	void Update () {
-	
-	}
+	void Update () {}
 }

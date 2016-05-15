@@ -29,7 +29,6 @@ public class Clown_Patrol : MonoBehaviour {
 
 			agent.destination = targetDestinations[targetId].position;
 
-
 		}
 	
 	}

@@ -34,8 +34,14 @@ public class PlayerHealth : MonoBehaviour {
     void Update () {
 
 		healthBar.value = Prefs.playerHealth;
-		//this line is necessary to make sure any changes to the 
-		//health made outside of this script are shown on the healthbar
+
+		if (Prefs.playerHealth <= 10) {
+			//make screen low-alpha red here!!!!
+			//change colour of the health bar to red (if green)
+		} else {
+			//remove red alpha overlay
+			//return health bar to green (if red)		
+		}
 
 		timer++;
 
@@ -43,6 +49,8 @@ public class PlayerHealth : MonoBehaviour {
 			timer = 0;
 			accumulatehealth ();
 		}
+
+
 
 	}
 }
