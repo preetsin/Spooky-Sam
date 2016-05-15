@@ -38,7 +38,7 @@ public class ChestHandler : MonoBehaviour {
 				animator.SetTrigger ("Pickup");
 				Destroy (keys, 3.0f);
 				AlertViewHandler alert = FindObjectOfType<AlertViewHandler> ();
-				alert.showAlert ("The keys to the graveyard have been added to your inventory...");
+				alert.showAlert ("You found the KEYS!!");
 				Prefs.hasKeys = true;
 			}
 		}
