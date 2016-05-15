@@ -3,12 +3,10 @@ using System.Collections;
 
 public class GraveyardZombieAI {
 
-    GameObject zombieAI;
     Animator animator;
 
     public GraveyardZombieAI(Animator animator)
     {
-        zombieAI = GameObject.FindGameObjectWithTag("ZombieAI");
         this.animator = animator;
     }
 
