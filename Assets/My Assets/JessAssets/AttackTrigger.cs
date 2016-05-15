@@ -40,11 +40,14 @@ public class AttackTrigger : MonoBehaviour {
 					enemyAnimator.SetTrigger ("Laugh");
 					evilLaugh = enemyObj.GetComponentInChildren<AudioSource> ();
 					evilLaugh.Play ();
+					if (!enemyAnimator.GetBool("isDead")) {
+						enemyObj.transform.LookAt (player.transform);
+					}
 				}
 
 				currEnemyId++;
 
-				enemyObj.transform.LookAt (player.transform);
+
 
 			}
 		}
@@ -68,7 +71,6 @@ public class AttackTrigger : MonoBehaviour {
 
 //				enemyAgent.destination = player.transform.position + player.transform.forward;
 
-
 				Vector3 newPos = new Vector3 ();
 				newPos.x = player.transform.position.x + player.transform.forward.x;
 				newPos.y = player.transform.position.y + player.transform.forward.y;
@@ -77,10 +79,14 @@ public class AttackTrigger : MonoBehaviour {
 
 
 				if (enemyAgent.transform.position != enemyAgent.destination) {
-					
-					// walk towards player, always watching
-					enemyAnimator.SetBool ("isWalking", true);
-					enemyObjects [1].transform.LookAt (player.transform);	
+
+					if (!enemyAnimator.GetBool("isDead")) {
+						enemyObjects [1].transform.LookAt (player.transform);
+						// walk towards player, always watching
+						enemyAnimator.SetBool ("isWalking", true);
+						enemyObjects [1].transform.LookAt (player.transform);	
+					}
+
 
 				} else {
 					

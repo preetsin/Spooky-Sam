@@ -7,6 +7,7 @@ public class Clown_huddle : MonoBehaviour {
 	public Animator animator;
 	public bool kneel = false;
 	public bool sit = false;
+	private int enemyhealth;
 
 	public AudioSource swordHitSFX;
 	public AudioSource swordHitForKillSFX;
@@ -18,13 +19,21 @@ public class Clown_huddle : MonoBehaviour {
 		agent = GetComponent<NavMeshAgent> ();
 		animator.SetBool ("isKneeling", kneel);
 		animator.SetBool ("isSitting", sit);
-
+		enemyhealth = 100;
 	}
 
 	void OnTriggerEnter(Collider col) {
 		Debug.Log ("HIT!!");
-		animator.SetTrigger ("respondToAttack");
 		swordHitSFX.Play ();
+		if (enemyhealth <= 100) {
+			enemyhealth -= 100;
+			if (enemyhealth == 0) {
+				animator.SetTrigger ("dieClownDie");
+				animator.SetBool ("isDead", true);
+			} else {
+				animator.SetTrigger ("respondToAttack");
+			}
+		}
 
 	}
 	
