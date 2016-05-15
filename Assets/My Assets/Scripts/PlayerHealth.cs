@@ -6,7 +6,7 @@ public class PlayerHealth : MonoBehaviour {
     public GameObject canvas;
 	public Slider healthBar;
 	private int timer;
-
+    public bool healthIncremented;
 
 	void Awake () {
 
@@ -20,14 +20,14 @@ public class PlayerHealth : MonoBehaviour {
 
 
 		Prefs.playerHealth += 10;
-
-		if (Prefs.playerHealth > 100) {
+        canvas.GetComponent<RawImage>().enabled = true;
+        if (Prefs.playerHealth > 100) {
 			
 			Prefs.playerHealth = 100;
 
 		}
 		healthBar.value = Prefs.playerHealth;
-
+        healthIncremented = true;
 
     }
 
@@ -36,12 +36,10 @@ public class PlayerHealth : MonoBehaviour {
 		healthBar.value = Prefs.playerHealth;
 
 		if (Prefs.playerHealth <= 10) {
-			//make screen low-alpha red here!!!!
-			//change colour of the health bar to red (if green)
+            canvas.GetComponent<RawImage>().enabled = true;
 		} else {
-			//remove red alpha overlay
-			//return health bar to green (if red)		
-		}
+            StartCoroutine(disableImage());
+        }
 
 		timer++;
 
@@ -53,4 +51,15 @@ public class PlayerHealth : MonoBehaviour {
 
 
 	}
+    IEnumerator disableImage()
+    {
+        while (Prefs.lastHealth > Prefs.playerHealth)
+        {
+            canvas.GetComponent<RawImage>().enabled = true;
+            yield return new WaitForSeconds(0.15f);
+            canvas.GetComponent<RawImage>().enabled = false;
+            Prefs.lastHealth = Prefs.playerHealth;
+        }
+
+    }
 }

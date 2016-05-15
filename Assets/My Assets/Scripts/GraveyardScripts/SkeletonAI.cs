@@ -3,12 +3,10 @@ using System.Collections;
 
 public class SkeletonAI  {
 
-    GameObject skeletonAI;
     Animator animator;
 
 	public SkeletonAI(Animator animator)
     {
-        skeletonAI = GameObject.FindGameObjectWithTag("SkeletonAI");
         this.animator = animator;    
     }
 

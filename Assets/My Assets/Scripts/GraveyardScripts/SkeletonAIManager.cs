@@ -11,7 +11,6 @@ public class SkeletonAIManager : MonoBehaviour {
     float health;
     float delay;
     float hitPause;
-    bool canHit;
 
     void Start ()
     {
@@ -23,7 +22,6 @@ public class SkeletonAIManager : MonoBehaviour {
         health = 50;
         delay = 0;
         hitPause = 1.5f;
-        canHit = true;
     }
 
 

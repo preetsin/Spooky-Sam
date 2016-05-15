@@ -7,6 +7,7 @@ public class AlertViewHandler : MonoBehaviour {
 	public Image alertView;
 	public Text alertText;
 	public static bool alertIsShowing;
+    public RawImage painImage;
 	private ArrayList alertQueue;
 	int cursor;
 
@@ -27,6 +28,7 @@ public class AlertViewHandler : MonoBehaviour {
 			alertView.enabled = false;
 		}
 
+       // GetComponentInParent<RawImage>().enabled = false;
 	}
 
 
@@ -48,6 +50,13 @@ public class AlertViewHandler : MonoBehaviour {
 			}
 
 		}
+       
+            
+       
+           
+            
+        
+
 	}
 
 
@@ -87,4 +96,5 @@ public class AlertViewHandler : MonoBehaviour {
 
 
 	}
+    
 }

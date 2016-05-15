@@ -18,6 +18,7 @@ public class GraveyardController {
     FlickerLight flickerLight;
 
     ParticleSystem particleSystem;
+    GameObject[] movableCrates;
 
     float delay;
 
@@ -37,6 +38,7 @@ public class GraveyardController {
         flickerLight = graveyardController.GetComponent<FlickerLight>();
 
         graveyardDataManager = GraveyardDataManager.GetInstance();
+        movableCrates = GameObject.FindGameObjectsWithTag("GraveyardMovableCrate");
         
     }
 
@@ -69,6 +71,7 @@ public class GraveyardController {
                 //TurnOffLights();
                 flickerLight.enabled = true;
                 graveyardDataManager.ExitDoorLeverToggled = true;
+                DestroyMovableCrates();
             }
             else if (doorLever.Toggled)
             {
@@ -116,4 +119,12 @@ public class GraveyardController {
         Cursor.visible = false;
     }
     
+    void DestroyMovableCrates()
+    {
+        foreach (GameObject crate in movableCrates)
+        {
+            crate.SetActive(false);
+        }
+    }
+
 }
