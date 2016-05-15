@@ -3,12 +3,14 @@ using System.Collections;
 
 public class FlickerLight : MonoBehaviour {
 
-    GameObject[] lightPosts;
+    GameObject[] pointLights;
     FlickerLight flickerLights;
+    GameObject lightPost;
 
     void Start()
     {
-        lightPosts = GameObject.FindGameObjectsWithTag("GraveyardLightpost");
+        pointLights = GameObject.FindGameObjectsWithTag("GraveyardLightpost");
+        lightPost = GameObject.Find("Lightpost (2)");
         StartFlickeringSound();
     }
 
@@ -16,24 +18,21 @@ public class FlickerLight : MonoBehaviour {
 
         var randomNumber = Random.value;
 
-        if(randomNumber <= 0.9) { lightPosts[0].SetActive(false); } 
-        else { lightPosts[0].SetActive(true); }
+        if(randomNumber <= 0.9) { pointLights[0].SetActive(false); } 
+        else { pointLights[0].SetActive(true); }
 
-        if (randomNumber >= 0.1) { lightPosts[1].SetActive(false); } 
-        else { lightPosts[1].SetActive(true); }
+        if (randomNumber >= 0.1) { pointLights[1].SetActive(false); } 
+        else { pointLights[1].SetActive(true); }
 
-        if (randomNumber >= 0.3 && randomNumber <= 0.4) { lightPosts[2].SetActive(true); }
-        else { lightPosts[2].SetActive(false); }
+        if (randomNumber >= 0.3 && randomNumber <= 0.4) { pointLights[2].SetActive(true); }
+        else { pointLights[2].SetActive(false); }
 
-        if (randomNumber >= 0.6 && randomNumber <= 0.7) { lightPosts[3].SetActive(true); }
-        else { lightPosts[3].SetActive(false); }
+        if (randomNumber >= 0.6 && randomNumber <= 0.7) { pointLights[3].SetActive(true); }
+        else { pointLights[3].SetActive(false); }
     }
 
     private void StartFlickeringSound()
     {
-        foreach (GameObject lightPost in lightPosts)
-        {
-            lightPost.GetComponent<AudioSource>().enabled = true;
-        }
+        lightPost.GetComponent<AudioSource>().enabled = true;
     }
 }

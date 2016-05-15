@@ -9,6 +9,7 @@ public class AlertScript : MonoBehaviour {
     bool exitDoorMsgDisplayed;
     bool doorLeverCageMsgDisplayed;
     bool outsideDoorInstructionDisplayed;
+    bool gameStartInstructioinDisplayed;
 
     void Start()
     {
@@ -17,6 +18,7 @@ public class AlertScript : MonoBehaviour {
         exitDoorMsgDisplayed = false;
         doorLeverCageMsgDisplayed = false;
         outsideDoorInstructionDisplayed = false;
+        gameStartInstructioinDisplayed = false;
     }
 
     void OnTriggerEnter(Collider other)
@@ -29,8 +31,9 @@ public class AlertScript : MonoBehaviour {
         {
             alert.showAlert("Find gun to shootdown door and get access to Exit Door Lever.");
             doorLeverCageMsgDisplayed = true;
+            Destroy(this.gameObject);
         }
-        
+
         if (other.CompareTag("Player") && 
             this.gameObject.name == "ExitDoorInstructionCollider" && 
             !exitDoorMsgDisplayed &&
@@ -38,6 +41,7 @@ public class AlertScript : MonoBehaviour {
         {
             alert.showAlert("Toggle Door Lever to Open Exit door.");
             exitDoorMsgDisplayed = true;
+            Destroy(this.gameObject);
         }
 
         if (other.CompareTag("Player") && 
@@ -47,6 +51,16 @@ public class AlertScript : MonoBehaviour {
         {
             alert.showAlert("Door is locked. Will need to jump over the fence");
             outsideDoorInstructionDisplayed = true;
+            Destroy(this.gameObject);
+        }
+
+        if (other.CompareTag("Player") &&
+            this.gameObject.name == "GameStartInstructionsCollider" &&
+            !gameStartInstructioinDisplayed)
+        {
+            alert.showAlert("Safety and freedom lie at the far end of the graveyard but look out for ghouls and spooks.");
+            gameStartInstructioinDisplayed = true;
+            Destroy(this.gameObject);
         }
     }
 }
