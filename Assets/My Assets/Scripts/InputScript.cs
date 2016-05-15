@@ -176,10 +176,14 @@ public class InputScript : MonoBehaviour
 
 
         if (Input.GetKey(KeyCode.Alpha1)) {
-            anim.SetBool("HasTorch", false);
-            anim.SetBool("ShiningTorch", false);
-            GameObject.FindGameObjectWithTag("Torchy").GetComponent<Light>().intensity = 0;
-            GetComponent<Outfitter>().weapons[2].models[0].enabled = false;
+           
+			if (SceneManager.GetActiveScene().name.Equals("houseScene"))
+			{
+				anim.SetBool("HasTorch", false);
+				anim.SetBool("ShiningTorch", false);
+            	GameObject.FindGameObjectWithTag("Torchy").GetComponent<Light>().intensity = 0;
+            	GetComponent<Outfitter>().weapons[2].models[0].enabled = false;
+			}
             Debug.Log(GetComponent<PlayerWeapons>().weapons);
 
             if (GetComponent<PlayerWeapons>().weapons.Contains(1))
