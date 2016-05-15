@@ -86,7 +86,13 @@ public class ZombieAIManager : MonoBehaviour {
 
     void OnTriggerStay()
     {
-        Prefs.playerHealth -= 2;
+        reduceHealth();
+    }
+
+    IEnumerator reduceHealth()
+    {
+        yield return new WaitForSeconds(1);
+        Prefs.playerHealth -= 1;
     }
 
 }
