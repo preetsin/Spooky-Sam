@@ -200,6 +200,7 @@ public class InputScript : MonoBehaviour
                 GetComponent<Outfitter>().weapons[1].models[0].enabled = false;
                 GetComponent<Outfitter>().weapons[2].models[0].enabled = true;
                 weaponIconView.sprite = weaponIcons[1];
+				anim.SetBool ("hasSword", true);
 
             }
             else if (GetComponent<PlayerWeapons>().weapons.Contains(3))
