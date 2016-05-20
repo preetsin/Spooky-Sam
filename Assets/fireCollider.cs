@@ -5,7 +5,7 @@ public class fireCollider : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col) {
 		if (col.tag == "Player") {
-			Prefs.playerHealth -= 5;
+			Prefs.playerHealth -= 10;
 		}
 	}
 

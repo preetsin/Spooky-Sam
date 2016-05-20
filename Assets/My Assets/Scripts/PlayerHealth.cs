@@ -20,7 +20,6 @@ public class PlayerHealth : MonoBehaviour {
     void accumulatehealth()
     {
 
-
 		Prefs.playerHealth += 10;
         canvas.GetComponent<RawImage>().enabled = false;
         if (Prefs.playerHealth > 100) {

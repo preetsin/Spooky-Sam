@@ -4,6 +4,7 @@ using System.Collections;
 public class Clown_huddle : MonoBehaviour {
 
 	NavMeshAgent agent;
+	public GameObject gameObj;
 	public Animator animator;
 	public Animator playerAnimator;
 	public bool kneel = false;
@@ -26,6 +27,8 @@ public class Clown_huddle : MonoBehaviour {
 
 		if (col.tag == "Player") {
 
+
+
 			//anim.trigger attack
 
 //			if (playerAnimator.GetBool ("hasSword")) {
@@ -37,7 +40,7 @@ public class Clown_huddle : MonoBehaviour {
 						animator.SetBool ("isDead", true);
 					} else {
 						animator.SetTrigger ("respondToAttack");
-						animator.transform.LookAt (col.gameObject.transform);
+						gameObj.transform.LookAt (col.gameObject.transform);
 						animator.SetTrigger ("clownAttack");
 						animator.SetBool ("isWalking", true);
 					}
