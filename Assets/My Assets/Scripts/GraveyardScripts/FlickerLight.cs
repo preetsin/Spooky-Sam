@@ -24,10 +24,10 @@ public class FlickerLight : MonoBehaviour {
         if (randomNumber >= 0.1) { pointLights[1].SetActive(false); } 
         else { pointLights[1].SetActive(true); }
 
-        if (randomNumber >= 0.3 && randomNumber <= 0.4) { pointLights[2].SetActive(true); }
+        if (randomNumber == 0.3) { pointLights[2].SetActive(true); }
         else { pointLights[2].SetActive(false); }
 
-        if (randomNumber >= 0.6 && randomNumber <= 0.7) { pointLights[3].SetActive(true); }
+        if (randomNumber == 0.6) { pointLights[3].SetActive(true); }
         else { pointLights[3].SetActive(false); }
     }
 

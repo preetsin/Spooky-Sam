@@ -21,4 +21,5 @@ public class GraveyardDataManager  {
     public bool InsideSingleDoorBroken { get; set; }
     public bool ExitDoorLeverToggled { get; set; }
     public bool EnemiesKilled { get; set; }
+    public bool Shooting { get; set; }
 }
