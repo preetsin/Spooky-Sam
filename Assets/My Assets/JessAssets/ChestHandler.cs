@@ -16,7 +16,7 @@ public class ChestHandler : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col) {
-		if (col.tag == "Player" && Prefs.chestCanOpen) {
+		if (col.tag == "Player" && Prefs.clownDeathToll >= 3) {
 			lidCanOpen = true;
 			keysCanMove = true;
 		}

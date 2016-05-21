@@ -104,12 +104,12 @@ public class InputScript : MonoBehaviour
 				alert.showAlert ("Are you sure you want to leave the game?\n" +
 					"Game progress will not be saved\n" +
 					"ENTER : Keep playing\n" +
-					"ESCAPE : Leave Game");
+					"Escape : Leave Game");
 
 
-//				if (Input.GetKeyUp (KeyCode.Escape)) {
+				if (Input.GetKeyUp (KeyCode.Escape)) {
 					SceneManager.LoadScene ("MainMenu");
-//				}
+				}
 			}
 		}
 
