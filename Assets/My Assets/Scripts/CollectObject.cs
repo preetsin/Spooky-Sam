@@ -24,12 +24,14 @@ public class CollectObject : MonoBehaviour {
                     if (manager.lightMsg == false)
                     {
                         alert.showAlert("Let there be light! Press '2' to to select flashlight and RMB to use.");
-                        Time.timeScale = 0.0f;
+//                        Time.timeScale = 0.0f;
                         manager.lightMsg = true;
                     }
                 break;
             case "Sword":
 				weaponId = 2;
+				alert.showAlert("A sword is rather useless if you don't use it...\n Hit '1' to arm yourself with the sword");
+
 				break;
           
             case "SpacePistol":

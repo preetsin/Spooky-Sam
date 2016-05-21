@@ -32,7 +32,6 @@ public class AttackTrigger : MonoBehaviour {
 				Animator enemyAnimator = enemyObj.GetComponentInChildren<Animator> ();
 				NavMeshAgent enemyAgent = enemyObj.GetComponentInChildren<NavMeshAgent> ();
 
-				// enemies all stand up to face player
 				enemyAnimator.SetBool ("isSitting", false);
 				enemyAnimator.SetBool ("isKneeling", false);
 				enemyAnimator.SetBool ("isWalking", false);

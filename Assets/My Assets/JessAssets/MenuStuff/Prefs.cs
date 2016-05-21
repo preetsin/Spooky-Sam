@@ -10,6 +10,7 @@ public class Prefs : MonoBehaviour {
 
 	public static bool musicEnabled = true;
 	public static bool sfxEnabled = true;
+	public static bool hasSeenSpider = false;
 
 
 }

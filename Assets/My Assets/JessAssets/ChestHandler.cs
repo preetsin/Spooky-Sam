@@ -19,6 +19,10 @@ public class ChestHandler : MonoBehaviour {
 		if (col.tag == "Player" && Prefs.clownDeathToll >= 3) {
 			lidCanOpen = true;
 			keysCanMove = true;
+		} else {
+			AlertViewHandler alert = FindObjectOfType<AlertViewHandler> ();
+			alert.showAlert ("Nice try... but the chest appears to be enchanted.");
+			alert.showAlert ("The enchantment will be broken only when these clowns are all dead.");
 		}
 
 

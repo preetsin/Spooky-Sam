@@ -94,8 +94,7 @@ public class InputScript : MonoBehaviour
             anim.SetTrigger("Jump");
             moveDirection.y = 10f;
 
-
-        }
+		}
 
 		if (Input.GetKeyUp (KeyCode.Escape)) {
 
@@ -112,6 +111,7 @@ public class InputScript : MonoBehaviour
 				}
 			}
 		}
+
 
 
 

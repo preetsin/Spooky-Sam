@@ -52,6 +52,7 @@ public class AlertViewHandler : MonoBehaviour {
 
 	public void showAlert(string whatToSay) {
 		if (!alertIsShowing) {
+			Time.timeScale = 0;
 			if (alertText != null) {
 				alertText.enabled = true;
 			}
@@ -71,6 +72,7 @@ public class AlertViewHandler : MonoBehaviour {
 	public void dismissAlert() {
 		Debug.Log ("Alert Dismissed");
 		alertIsShowing = false;
+		Time.timeScale = 1;
 
 		if (alertText != null) {
 			alertText.enabled = false;

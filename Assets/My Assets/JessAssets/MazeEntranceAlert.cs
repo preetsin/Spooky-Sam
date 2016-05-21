@@ -4,7 +4,6 @@ using System.Collections;
 public class MazeEntranceAlert : MonoBehaviour {
 	AlertViewHandler alert;
 	int currentMsg = 0;
-
 	public AudioSource mazeAmbience;
 
 

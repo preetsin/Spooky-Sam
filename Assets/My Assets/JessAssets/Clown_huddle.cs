@@ -27,9 +27,7 @@ public class Clown_huddle : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col) {
 
-
 		if (col.tag == "Player") {
-
 
 			if (playerAnimator.GetBool ("hasSword") && inputScript.isAttacking) {
 				if (Prefs.sfxEnabled) {
@@ -40,6 +38,7 @@ public class Clown_huddle : MonoBehaviour {
 					if (enemyhealth == 0) {
 						animator.SetTrigger ("dieClownDie");
 						animator.SetBool ("isDead", true);
+						agent.enabled = false;
 						Prefs.clownDeathToll += 1;
 					} else {
 						animator.SetTrigger ("respondToAttack");
