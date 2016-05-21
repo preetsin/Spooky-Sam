@@ -10,7 +10,6 @@ public class AlertViewHandler : MonoBehaviour {
     public RawImage painImage;
 	private ArrayList alertQueue;
 	int cursor;
-	public bool waitingForInput = false;
 
 	// Use this for initialization
 	void Start () {

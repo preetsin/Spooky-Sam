@@ -8,8 +8,8 @@ public class Prefs : MonoBehaviour {
 	public static bool chestCanOpen = false;
 	public static int clownDeathToll = 0;
 
-	public static bool musicEnabled = false;
-	public static bool sfxEnabled = false;
+	public static bool musicEnabled = true;
+	public static bool sfxEnabled = true;
 
 
 }

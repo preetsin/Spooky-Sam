@@ -27,9 +27,11 @@ public class Clown_huddle : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col) {
 
-		if (col.tag == "Player" && inputScript.isAttacking) {
 
-			if (playerAnimator.GetBool ("hasSword")) {
+		if (col.tag == "Player") {
+
+
+			if (playerAnimator.GetBool ("hasSword") && inputScript.isAttacking) {
 				if (Prefs.sfxEnabled) {
 					swordHitSFX.Play ();
 				}
@@ -47,7 +49,9 @@ public class Clown_huddle : MonoBehaviour {
 					}
 				}
 			} else {
-				//alertview warning don't have sword
+				
+				Prefs.playerHealth -= 5;
+
 			}
 		}
 	}

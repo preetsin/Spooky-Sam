@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour {
     public static int lastHealth;
 
 
+
     void Awake () {
         lastHealth = Prefs.playerHealth;
 		healthBar.value = Prefs.playerHealth;
