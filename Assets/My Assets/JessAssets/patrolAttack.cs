@@ -1,28 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Clown_huddle : MonoBehaviour {
 
+// add this to clown/enemy
+// add audio source with sword sound to enemy
+// drag audio source to script
+// drag A03/player to script
+
+public class patrolAttack : MonoBehaviour {
+
+	Animator animator;
 	NavMeshAgent agent;
-	public GameObject gameObj;
-	public Animator animator;
-	public Animator playerAnimator;
-	public bool kneel = false;
-	public bool sit = false;
-	private int enemyhealth;
+	int enemyhealth;
 	InputScript inputScript;
-
 	public AudioSource swordHitSFX;
+	public Animator playerAnimator;
 
 
-
-
+	// Use this for initialization
 	void Start () {
-		agent = GetComponent<NavMeshAgent> ();
-		animator.SetBool ("isKneeling", kneel);
-		animator.SetBool ("isSitting", sit);
+		
+		animator = GetComponentInChildren<Animator> ();
+		agent = GetComponentInChildren<NavMeshAgent> ();
 		enemyhealth = 100;
 		inputScript = FindObjectOfType<InputScript> ();
+
 	}
 
 	void OnTriggerEnter(Collider col) {
@@ -39,21 +41,26 @@ public class Clown_huddle : MonoBehaviour {
 						animator.SetTrigger ("dieClownDie");
 						animator.SetBool ("isDead", true);
 						agent.enabled = false;
-						Prefs.clownDeathToll += 1;
 					} else {
 						animator.SetTrigger ("respondToAttack");
-						gameObj.transform.LookAt (col.gameObject.transform);
+						gameObject.transform.LookAt (col.gameObject.transform);
 						animator.SetTrigger ("clownAttack");
 						animator.SetBool ("isWalking", true);
 					}
 				}
 			} else {
-				
+
 				Prefs.playerHealth -= 5;
 
 			}
 		}
 	}
+		
+
+
+
+	// Update is called once per frame
+	void Update () {
 	
-	void Update () {}
+	}
 }
