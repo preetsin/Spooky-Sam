@@ -11,4 +11,5 @@ public class Prefs : MonoBehaviour {
 	public static bool musicEnabled = false;
 	public static bool sfxEnabled = false;
 
+
 }

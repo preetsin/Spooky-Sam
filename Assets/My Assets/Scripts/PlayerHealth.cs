@@ -34,6 +34,11 @@ public class PlayerHealth : MonoBehaviour {
        
 		if (Prefs.playerHealth <= 10) {
             canvas.GetComponent<RawImage>().enabled = true;
+			if (Prefs.playerHealth <= 0) {
+				//animate death
+
+				//Game Over
+			}
 		} else {
             StartCoroutine(disableImage());
             lastHealth = Prefs.playerHealth;
