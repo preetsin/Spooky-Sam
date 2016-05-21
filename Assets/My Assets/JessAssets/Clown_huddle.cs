@@ -10,6 +10,7 @@ public class Clown_huddle : MonoBehaviour {
 	public bool kneel = false;
 	public bool sit = false;
 	private int enemyhealth;
+	private int deathToll = 0;
 
 	public AudioSource swordHitSFX;
 
@@ -27,17 +28,17 @@ public class Clown_huddle : MonoBehaviour {
 
 		if (col.tag == "Player") {
 
-
-
-			//anim.trigger attack
-
-//			if (playerAnimator.GetBool ("hasSword")) {
+			if (playerAnimator.GetBool ("hasSword")) {
 				swordHitSFX.Play ();
 				if (enemyhealth <= 100) {
 					enemyhealth -= 25;
 					if (enemyhealth == 0) {
 						animator.SetTrigger ("dieClownDie");
 						animator.SetBool ("isDead", true);
+						deathToll += 1;
+						if (deathToll == 3) {
+							Prefs.chestCanOpen = true;
+						}
 					} else {
 						animator.SetTrigger ("respondToAttack");
 						gameObj.transform.LookAt (col.gameObject.transform);
@@ -45,9 +46,9 @@ public class Clown_huddle : MonoBehaviour {
 						animator.SetBool ("isWalking", true);
 					}
 				}
-//			} else {
-//				//alertview warning don't have sword
-//			}
+			} else {
+				//alertview warning don't have sword
+			}
 		}
 	}
 	

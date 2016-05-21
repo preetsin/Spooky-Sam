@@ -10,9 +10,7 @@ public class AlertViewHandler : MonoBehaviour {
     public RawImage painImage;
 	private ArrayList alertQueue;
 	int cursor;
-
-
-
+	public bool waitingForInput = false;
 
 	// Use this for initialization
 	void Start () {
@@ -35,7 +33,7 @@ public class AlertViewHandler : MonoBehaviour {
 
 
     void Update() {
-        if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp(KeyCode.Return)) {
+        if (Input.GetKeyUp(KeyCode.Return)) {
 
 			if (cursor < alertQueue.Count) {
 				//show next alert in queue
@@ -50,13 +48,6 @@ public class AlertViewHandler : MonoBehaviour {
 			}
 
 		}
-       
-            
-       
-           
-            
-        
-
 	}
 
 
@@ -72,15 +63,11 @@ public class AlertViewHandler : MonoBehaviour {
 			alertText.text = whatToSay;
 			alertIsShowing = true;
 		} else {
-			//make so only adds if it is not already in queue... nod ouble-ups
-			Debug.Log ("Add to queue: " + whatToSay);
+			Debug.Log ("Added to queue: " + whatToSay);
 			alertQueue.Add (whatToSay);
 		}
-
-
-
-
 	}
+		
 
 	public void dismissAlert() {
 		Debug.Log ("Alert Dismissed");

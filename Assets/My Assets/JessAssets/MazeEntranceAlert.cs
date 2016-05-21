@@ -5,11 +5,17 @@ public class MazeEntranceAlert : MonoBehaviour {
 	AlertViewHandler alert;
 	int currentMsg = 0;
 
+	public AudioSource mazeAmbience;
+
 
 
 
 	// Use this for initialization
 	void Start () {
+
+		if (Prefs.musicEnabled) {
+			mazeAmbience.Play();
+		}
 		alert = FindObjectOfType<AlertViewHandler> ();
 
 		alert.showAlert ("You might think that you've escaped all peril... but evil lies ahead.\n" +

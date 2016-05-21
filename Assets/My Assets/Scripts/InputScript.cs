@@ -97,6 +97,25 @@ public class InputScript : MonoBehaviour
 
         }
 
+		if (Input.GetKeyUp (KeyCode.Escape)) {
+
+			if (!AlertViewHandler.alertIsShowing) {
+				AlertViewHandler alert = FindObjectOfType<AlertViewHandler>();
+				alert.showAlert ("Are you sure you want to leave the game?\n" +
+					"Game progress will not be saved\n" +
+					"ENTER : Keep playing\n" +
+					"ESCAPE : Leave Game");
+
+
+//				if (Input.GetKeyUp (KeyCode.Escape)) {
+					SceneManager.LoadScene ("MainMenu");
+//				}
+			}
+		}
+
+
+
+
 
         moveDirection.y -= 20 * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);

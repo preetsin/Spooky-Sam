@@ -6,8 +6,10 @@ public class musicTrigger : MonoBehaviour {
 	AudioSource musicSource;
 
 	void OnTriggerEnter(Collider col) {
-		musicSource.Play ();
 
+		if (Prefs.musicEnabled) {
+			musicSource.Play ();
+		}
 	}
 
 	void Start () {

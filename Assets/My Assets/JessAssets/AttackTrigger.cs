@@ -39,9 +39,11 @@ public class AttackTrigger : MonoBehaviour {
 
 				if (currEnemyId == 1) {
 					enemyAnimator.SetTrigger ("Laugh");
-					evilLaugh = enemyObj.GetComponentInChildren<AudioSource> ();
-					evilLaugh.Play ();
-				}
+					if (Prefs.sfxEnabled) {
+						evilLaugh = enemyObj.GetComponentInChildren<AudioSource> ();
+						evilLaugh.Play ();
+					}
+									}
 				enemyObj.transform.LookAt (player.transform);
 
 				currEnemyId++;
