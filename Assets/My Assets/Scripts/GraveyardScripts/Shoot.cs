@@ -3,32 +3,33 @@ using System.Collections;
 
 public class Shoot : MonoBehaviour {
 
+    GraveyardDataManager graveyardDataManager;
     public Rigidbody bullet;
-    bool buttonUp;
     public float forceSpeed;
     AudioSource gunShot;
 
     void Start()
     {
+        graveyardDataManager = GraveyardDataManager.GetInstance();
+        graveyardDataManager.Shooting = true;
         gunShot = GetComponent<AudioSource>();
-        buttonUp = false;
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && graveyardDataManager.Shooting)
         {
-            InvokeRepeating("Shooting", 0.001f, 0.1f);
+            InvokeRepeating("ShootBullet", 0.1f, 0.2f); 
         }
 
         if (Input.GetButtonUp("Fire1"))
         {
-            CancelInvoke("Shooting");
+            CancelInvoke("ShootBullet");
         }
 
     }
 
-    void Shooting()
+    void ShootBullet()
     {
         Rigidbody instantiateBullet = Instantiate(bullet, transform.position, transform.rotation) as Rigidbody;
         instantiateBullet.velocity = transform.TransformDirection(new Vector3(0, 0, forceSpeed));
