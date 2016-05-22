@@ -11,5 +11,7 @@
         public bool strafeMsg = false;
         public bool lightMsg = false;
         public bool escapeMsg = false;
+	public bool ghoulMessage = false;
+	public bool leverlMessage = false;
 
     }

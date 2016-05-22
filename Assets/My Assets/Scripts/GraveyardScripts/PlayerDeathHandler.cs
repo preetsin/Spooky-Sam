@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerDiesMaze : MonoBehaviour {
+public class PlayerDeathHandler : MonoBehaviour {
 
     Animator animator;
 	bool isDead;

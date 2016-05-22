@@ -6,12 +6,18 @@ public class SecretDoor : MonoBehaviour {
     public GameObject doorLeverPivot;
     public bool closeToLever;
     bool toggled;
-
+	AlertViewHandler alertView;
    
 
+
+	void Start(){
+		alertView = FindObjectOfType<AlertViewHandler> ();
+
+	}
     public SecretDoor() {
         closeToLever = false;
         toggled = false;
+	
       
     }
      
@@ -26,6 +32,10 @@ public class SecretDoor : MonoBehaviour {
                   
                    GetComponent<AudioSource>().Play();
                    openSecretDoor();
+				if (HouseAlertManager.Instance.leverlMessage == false) {
+					alertView.showAlert ("It sounds like a secret door just opened somewhere...");
+					HouseAlertManager.Instance.leverlMessage = true;
+				}
            }
             //else if (doorLever.Toggled)
             //{

@@ -17,7 +17,7 @@ public class GhoulNav : MonoBehaviour
     bool hasSpoke = false;
     bool receivedHit = false;
     GhoulHealth health;
-
+	AlertViewHandler alertView;
 
     void Start() {
         hasTarget = false;
@@ -28,7 +28,7 @@ public class GhoulNav : MonoBehaviour
         agent.destination = targetDestinations[targetId].position;
         //animator.SetBool("IsWalking", true);
         health = GetComponent<GhoulHealth>();
-        
+		alertView = FindObjectOfType<AlertViewHandler> ();
     }
 
     void Update()
@@ -79,6 +79,12 @@ public class GhoulNav : MonoBehaviour
         {
             if (objectHit.transform.tag == "Player")
             {
+				if (HouseAlertManager.Instance.ghoulMessage == false) {
+					alertView.showAlert ("The ghouls are sensitive to light..");
+					alertView.showAlert ("and blunt force trauma.");
+					HouseAlertManager.Instance.ghoulMessage = true;
+				
+				}
                 GetComponent<NavMeshAgent>().speed = 3f;
                 Debug.Log("Close to enemy" + objectHit.distance);
                 if (!hasSpoke)
