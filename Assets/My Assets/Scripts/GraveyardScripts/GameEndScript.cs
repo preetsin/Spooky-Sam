@@ -10,7 +10,8 @@ public class GameEndScript : MonoBehaviour {
     AudioListener gameEndCamAudioListener;
     GraveyardDataManager graveyardDataManager;
     Animator theHudAnimator;
-    AudioSource audio;
+    AudioSource audioSource;
+    public AudioClip endClip;
 
 
     void Start () {
@@ -21,7 +22,7 @@ public class GameEndScript : MonoBehaviour {
         gameEndCamAnimation = gameEndCamera.GetComponent<Animation>();
         graveyardDataManager = GraveyardDataManager.GetInstance();
         theHudAnimator = GameObject.Find("TheHUD").GetComponent<Animator>();
-        audio = GameObject.FindGameObjectWithTag("BackgroundSound").GetComponent<AudioSource>();
+        audioSource = GameObject.FindGameObjectWithTag("BackgroundSound").GetComponent<AudioSource>();
 
         gameEndCamAudioListener.enabled = false;
         gameEndCam.enabled = false;
@@ -36,7 +37,8 @@ public class GameEndScript : MonoBehaviour {
             gameEndCamAnimation.Play();
             graveyardDataManager.Shooting = false;
             theHudAnimator.SetTrigger("GameEnded");
-            audio.enabled = false;
+            audioSource.clip = endClip;
+            audioSource.Play();
         }
     }
 
