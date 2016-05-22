@@ -28,6 +28,10 @@ public class PlayerDeathHandler : MonoBehaviour {
             GetComponent<InputScript>().enabled = false;
             
         }
+
+		if (Input.GetKeyUp (KeyCode.Escape)) {
+			SceneManager.LoadScene ("MainMenu");
+		}
 	}
 
 }
