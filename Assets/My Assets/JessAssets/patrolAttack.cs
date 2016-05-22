@@ -49,8 +49,9 @@ public class patrolAttack : MonoBehaviour {
 					}
 				}
 			} else {
-
-				Prefs.playerHealth -= 5;
+				if (enemyhealth > 0) {
+					Prefs.playerHealth -= 5;
+				}
 
 			}
 		}
