@@ -35,6 +35,11 @@ public class MainMenuHandler : MonoBehaviour {
 			SceneManager.LoadScene ("MainMenu");
 			break;
 
+		case "quitBttn":
+			Debug.Log ("Quit bttn selected");
+			Application.Quit ();
+			break;
+
 		default:
 			Debug.Log ("Error: no button detected");
 			break;
