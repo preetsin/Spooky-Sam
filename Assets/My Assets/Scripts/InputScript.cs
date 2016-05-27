@@ -48,7 +48,7 @@ public class InputScript : MonoBehaviour
         float move = Input.GetAxis("Vertical");
 
         anim.SetFloat("Speed", move);
-        transform.Rotate(0, Input.GetAxis("Horizontal") * 5f, 0);
+        transform.Rotate(0, Input.GetAxis("Mouse X") * 5f, 0);
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         if (move < 0)
         {
@@ -64,22 +64,22 @@ public class InputScript : MonoBehaviour
             speed = 10f;
 
         }
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.A))
         {
 
             anim.SetBool("StrafeLeft", true);
             controller.SimpleMove(transform.TransformDirection(Vector3.left) * 5f);
         }
-        if (Input.GetKeyUp(KeyCode.Q))
+        if (Input.GetKeyUp(KeyCode.A))
         {
             anim.SetBool("StrafeLeft", false);
         }
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.D))
         {
             anim.SetBool("StrafeRight", true);
             controller.SimpleMove(transform.TransformDirection(Vector3.right) * 5f);
         }
-        if (Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.D))
         {
             anim.SetBool("StrafeRight", false);
         }
